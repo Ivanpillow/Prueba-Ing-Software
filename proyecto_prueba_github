@@ -1,0 +1,253 @@
+#Hecho por Diego Iván Hernandez Muñoz
+#En esta clase genero tanto mi interfaz gráfica como la llamada a mis funciones con los algoritmos, y despues muestro el tablero con la solución
+
+import tkinter as tk
+from tkinter import messagebox, Text
+import time
+import random
+from deap import algorithms, base, creator, tools
+import numpy
+
+class SolucionNReinas:
+    def __init__(self, N):
+        self.N = N
+        self.solucion = None
+
+    def fuerza_bruta(self):
+        # Inicializar un tablero vacío
+        tablero = [-1] * self.N
+
+        # Función para verificar si una reina puede colocarse en una posición dada
+        def es_seguro(fila, col):
+            for i in range(fila):
+                if (
+                    tablero[i] == col
+                    or tablero[i] - i == col - fila
+                    or tablero[i] + i == col + fila
+                ):
+                    return False
+            return True
+
+        # Función recursiva para colocar reinas en el tablero
+        def colocar_reinas(fila):
+            if fila == self.N:
+                # Se encontró una solución, copiar el tablero a la solución
+                self.solucion = tablero.copy()
+                return
+            for col in range(self.N):
+                if es_seguro(fila, col):
+                    tablero[fila] = col
+                    colocar_reinas(fila + 1)
+
+        # Iniciar la colocación de reinas desde la fila 0
+        colocar_reinas(0)
+
+    # FUNCIÓN DE FITNESS
+    def evalNQueens(self, individual):
+        size = len(individual)
+        # Los ataques sólo pueden ser en las diagonales
+        diagonal_izquierda_derecha = [0] * (2*size-1)
+        diagonal_derecha_izquierda = [0] * (2*size-1)
+        
+        # Número de reinas en cada diagonal
+        for i in range(size): # recorremos las columnas
+            diagonal_izquierda_derecha[i+individual[i]] += 1 # [columna + fila]
+            diagonal_derecha_izquierda[size-1-i+individual[i]] += 1 # [size-1-columna+ fila]
+        
+        # Número de ataques en cada diagonal
+        suma = 0
+        for i in range(2*size-1): # recorremos todas las diagonales
+            if diagonal_izquierda_derecha[i] > 1: # hay ataques
+                suma += diagonal_izquierda_derecha[i] - 1 # n-1 ataques
+            if diagonal_derecha_izquierda[i] > 1:
+                suma += diagonal_derecha_izquierda[i] - 1
+        return suma,
+
+    def algoritmo_genetico(self):
+        start_time = time.time()
+        # Se define el problema
+        creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+        creator.create("Individual", list, fitness=creator.FitnessMin)
+        toolbox = base.Toolbox()
+        toolbox.register("permutation", random.sample, range(self.N), self.N)
+        toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.permutation)
+        toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+        toolbox.register("evaluate", self.evalNQueens)
+        toolbox.register("mate", tools.cxPartialyMatched)
+        toolbox.register("mutate", tools.mutShuffleIndexes, indpb=2.0/self.N)
+        toolbox.register("select", tools.selTournament, tournsize=3)
+
+        # Inicializar la población
+        pop = toolbox.population(n=300)
+
+        hof = tools.HallOfFame(1) # objeto que almacena el mejor individuo
+
+        # Algoritmo genético
+        algorithms.eaSimple(pop, toolbox, cxpb=0.5, mutpb=0.2, ngen=100, stats=None, halloffame=hof, verbose=False)
+        
+        end_time = time.time()
+        tiempoTotal = end_time - start_time
+
+        # Obtener el mejor individuo después de las generaciones
+        mejor = tools.selBest(pop, 1)[0]
+
+        return mejor, tiempoTotal
+
+class InterfazReinas(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Problema de las N Reinas")
+        self.geometry("400x200")
+
+        # Crear un contenedor principal
+        contenedor = tk.Frame(self)
+        contenedor.pack(expand=True, fill="both")
+
+        # Crear elementos de la interfaz (etiquetas, entradas, botones, etc.)
+        self.label_n = tk.Label(contenedor, text="Número de reinas:")
+        self.entry_n = tk.Entry(contenedor)
+        self.button_fuerza_bruta = tk.Button(contenedor, text="Fuerza Bruta", command=self.resolver_fuerza_bruta)
+        self.button_genetico = tk.Button(contenedor, text="Algoritmo Genético", command=self.resolver_algoritmo_genetico)
+        self.button_mostrar_tablero = tk.Button(contenedor, text="Mostrar Tablero", command=self.mostrar_tablero)
+
+        # Centrar los elementos en el contenedor
+        self.label_n.grid(row=0, column=0, padx=10, pady=10)
+        self.entry_n.grid(row=0, column=1, padx=10, pady=10)
+        self.button_fuerza_bruta.grid(row=1, column=0, padx=10, pady=10)
+        self.button_genetico.grid(row=1, column=1, padx=10, pady=10)
+        self.button_mostrar_tablero.grid(row=2, column=0, columnspan=2, pady=10)
+
+        # Variable para almacenar la solución
+        self.solucion = None
+
+        # Crear un componente Text para mostrar las soluciones
+        self.text_soluciones = Text(contenedor, height=5, width=40)
+        self.text_soluciones.grid(row=3, column=0, columnspan=2, pady=10)
+
+    def resolver_fuerza_bruta(self):
+        self.resolver_FB("fuerza_bruta")
+
+    def resolver_algoritmo_genetico(self):
+        # Obtener valores de la interfaz
+        num_reinas = self.entry_n.get()
+
+        # Verificar si se ha ingresado el número de reinas
+        if not num_reinas:
+            messagebox.showinfo("Alerta", "Por favor, ingrese el número de reinas.")
+            return
+
+        n = int(num_reinas)
+
+        # Crear instancia de la clase SolucionNReinas
+        instancia_n_reinas = SolucionNReinas(N=n)
+
+        # Llamar al algoritmo genético
+        mejor, tiempo_ejecucion = instancia_n_reinas.algoritmo_genetico()
+
+        # Almacenar la solución para mostrar el tablero posteriormente
+        self.solucion = mejor
+
+        # Acceder a la solución encontrada
+        self.text_soluciones.delete(1.0, tk.END)  # Limpiar el Text
+        self.text_soluciones.insert(tk.END, f"Solución:\n{self.solucion}") 
+        messagebox.showinfo("Algoritmo Genético", f"Tiempo de Ejecución: {tiempo_ejecucion:.4f} segundos")
+
+    def resolver_FB(self, metodo):
+        # Obtener valores de la interfaz
+        num_reinas = self.entry_n.get()
+
+        # Verificar si se ha ingresado el número de reinas
+        if not num_reinas:
+            messagebox.showinfo("Alerta", "Por favor, ingrese el número de reinas.")
+            return
+
+        n = int(num_reinas)
+
+        # Mostrar advertencia si el número de reinas es mayor a 10
+        if n > 10:
+            advertencia = f"¡Advertencia!\nEl tiempo de ejecución puede aumentar considerablemente con más de 10 reinas."
+
+            inicio_tiempo = time.time()
+
+            # Crear instancia de la clase SolucionNReinas
+            instancia_n_reinas = SolucionNReinas(N=n)
+
+            # Llamar al algoritmo correspondiente según el método seleccionado
+            if metodo == "fuerza_bruta":
+                instancia_n_reinas.fuerza_bruta()
+
+            # Almacenar la solución para mostrar el tablero posteriormente
+            self.solucion = instancia_n_reinas.solucion
+
+            fin_tiempo = time.time()
+            tiempo_ejecucion = fin_tiempo - inicio_tiempo
+
+            advertencia += f"\nTiempo de ejecución: {tiempo_ejecucion:.4f} segundos"
+            messagebox.showinfo("Advertencia", advertencia)
+
+            # Acceder a la solución encontrada
+            self.text_soluciones.delete(1.0, tk.END)  # Limpiar el Text
+            self.text_soluciones.insert(tk.END, f"Solución:\n{self.solucion}")
+        elif n <= 10:
+            inicio_tiempo = time.time()
+
+            # Crear instancia de la clase SolucionNReinas
+            instancia_n_reinas = SolucionNReinas(N=n)
+
+            # Llamar al algoritmo correspondiente según el método seleccionado
+            if metodo == "fuerza_bruta":
+                instancia_n_reinas.fuerza_bruta()
+
+            # Almacenar la solución para mostrar el tablero posteriormente
+            self.solucion = instancia_n_reinas.solucion
+
+            fin_tiempo = time.time()
+            tiempo_ejecucion = fin_tiempo - inicio_tiempo
+
+            # Acceder a la solución encontrada
+            self.text_soluciones.delete(1.0, tk.END)  # Limpiar el Text
+            self.text_soluciones.insert(tk.END, f"Solución:\n{self.solucion}")
+            messagebox.showinfo("Fuerza Bruta", f"Tiempo de Ejecución: {tiempo_ejecucion:.4f} segundos")
+
+
+    def mostrar_tablero(self):
+        # Verificar si se ha resuelto el problema antes de mostrar el tablero
+        if self.solucion is None:
+            messagebox.showinfo("Alerta", "Primero resuelva el problema antes de mostrar el tablero.")
+            return
+
+        # Calcular el tamaño del tablero en función del número de reinas
+        tamano_tablero = max(8, int(self.entry_n.get()))
+
+        # Crear una nueva ventana para mostrar el tablero
+        ventana_tablero = tk.Toplevel(self)
+        ventana_tablero.title("Tablero de Ajedrez con Solución")
+
+        # Crear y mostrar el tablero en la nueva ventana
+        self.dibujar_tablero(ventana_tablero, self.solucion, tamano_tablero)
+
+    def dibujar_tablero(self, ventana, solucion, tamano_tablero):
+        # Calcular el tamaño de cada casilla del tablero
+        tamano_casilla = 400 // tamano_tablero
+
+        # Crear un lienzo para dibujar el tablero
+        canvas = tk.Canvas(ventana, width=400, height=400)
+        canvas.pack()
+
+        # Dibujar el tablero de ajedrez
+        for i in range(tamano_tablero):
+            for j in range(tamano_tablero):
+                x, y = j * tamano_casilla, i * tamano_casilla
+                color = "white" if (i + j) % 2 == 0 else "black"
+                canvas.create_rectangle(x, y, x + tamano_casilla, y + tamano_casilla, fill=color)
+
+        # Dibujar las reinas
+        for i, j in enumerate(solucion):
+            x, y = j * tamano_casilla, i * tamano_casilla
+            canvas.create_text(x + tamano_casilla // 2, y + tamano_casilla // 2, text="♛", font=("Arial", 20), fill="red")
+
+
+if __name__ == "__main__":
+    app = InterfazReinas()
+    app.mainloop()
