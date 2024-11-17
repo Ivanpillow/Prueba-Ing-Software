@@ -10,8 +10,8 @@ public class ConexionDB {
     // Declaramos los datos de conexion a la bd
     private static final String driver="com.mysql.jdbc.Driver";
     private static final String user="root";
-    private static final String pass="12345678";
-    private static final String url="jdbc:mysql://localhost:3306/login?characterEncoding=utf8";
+    private static final String pass="";
+    private static final String url="jdbc:mysql://localhost:3306/chess";
     //conexion a bd de mysql
     public Connection conectar(){
       con = null;

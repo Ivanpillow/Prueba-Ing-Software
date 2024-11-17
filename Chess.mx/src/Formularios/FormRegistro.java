@@ -42,6 +42,9 @@ public class FormRegistro extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jTextNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextEmail = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +97,17 @@ public class FormRegistro extends javax.swing.JFrame {
         jTextNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextNombre.setBorder(null);
 
+        jLabel4.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jLabel4.setText("Correo electrónico:");
+
+        jTextEmail.setBackground(new java.awt.Color(112, 145, 255));
+        jTextEmail.setForeground(new java.awt.Color(255, 255, 255));
+        jTextEmail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextEmail.setBorder(null);
+
+        jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jpFormRegistroLayout = new javax.swing.GroupLayout(jpFormRegistro);
         jpFormRegistro.setLayout(jpFormRegistroLayout);
         jpFormRegistroLayout.setHorizontalGroup(
@@ -104,28 +118,39 @@ public class FormRegistro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel3)
-                .addGap(21, 21, 21)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 63, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormRegistroLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(177, 177, 177))
             .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormRegistroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)))
+                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                        .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                        .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator3)
+                            .addComponent(jTextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jSeparator2)
-                        .addGap(85, 85, 85))
-                    .addComponent(jTextClave)))
+                    .addComponent(jTextClave, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jpFormRegistroLayout.setVerticalGroup(
             jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,13 +163,22 @@ public class FormRegistro extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(3, 3, 3)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,20 +210,28 @@ public class FormRegistro extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String nombreUsuario = jTextNombre.getText().trim();
         String claveUsuario = jTextClave.getText().trim();
+        String emailUsuario = jTextEmail.getText().trim();
 
         if (nombreUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa un nombre de usuario.");
+            JOptionPane.showMessageDialog(this, "Ingresa un nombre de usuario válido.");
             return;
         }
 
-        if (claveUsuario.isEmpty() || claveUsuario.length() < 8) {
-            JOptionPane.showMessageDialog(this, "La clave debe tener al menos 8 caracteres.");
+        if (emailUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa un correo válido.");
             return;
         }
+        
+        //if (claveUsuario.isEmpty() || claveUsuario.length() < 8) {
+        if (claveUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa una contraseña válida.");
+            return;
+        }
+        
 
         //registrar el usuario
         consultas con = new consultas();
-        boolean registroExitoso = con.guardarUsuario(nombreUsuario, claveUsuario);
+        boolean registroExitoso = con.guardarUsuario(nombreUsuario, emailUsuario, claveUsuario);
 
         if (registroExitoso) {
             //Registro exitoso
@@ -244,9 +286,12 @@ public class FormRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextClave;
+    private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JPanel jpFormRegistro;
     // End of variables declaration//GEN-END:variables

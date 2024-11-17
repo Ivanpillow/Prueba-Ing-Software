@@ -5,7 +5,15 @@
  */
 package Formularios;
 
+import Clases.ConexionDB;
+import Clases.Sesion;
 import Clases.consultas;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,7 +43,7 @@ public class FormLogin extends javax.swing.JFrame {
         jpLogin = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jtxtUsuario = new javax.swing.JTextField();
+        jtxtEmail = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -59,14 +67,14 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         jLabel1.setText("Chess.mx");
 
-        jtxtUsuario.setBackground(new java.awt.Color(112, 145, 255));
-        jtxtUsuario.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jtxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtUsuario.setBorder(null);
-        jtxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jtxtEmail.setBackground(new java.awt.Color(112, 145, 255));
+        jtxtEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jtxtEmail.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtEmail.setBorder(null);
+        jtxtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtUsuarioActionPerformed(evt);
+                jtxtEmailActionPerformed(evt);
             }
         });
 
@@ -74,7 +82,7 @@ public class FormLogin extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabel3.setText("Usuario:");
+        jLabel3.setText("Correo electrónico:");
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,14 +147,11 @@ public class FormLogin extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(15, 15, 15))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createSequentialGroup()
                                 .addComponent(lblPass)
-                                .addGap(74, 74, 74))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(88, 88, 88)))
+                                .addGap(74, 74, 74)))
                         .addGap(86, 86, 86))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
@@ -156,8 +161,9 @@ public class FormLogin extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnInSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(141, 141, 141))))
+                                    .addComponent(btnInSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel3))
+                        .addGap(126, 126, 126))))
             .addGroup(jpLoginLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(lblForgtPass)
@@ -170,12 +176,12 @@ public class FormLogin extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel3)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpLoginLayout.createSequentialGroup()
-                        .addComponent(jtxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
@@ -215,17 +221,18 @@ public class FormLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUsuarioActionPerformed
+    private void jtxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtUsuarioActionPerformed
+    }//GEN-LAST:event_jtxtEmailActionPerformed
 
     private void btnInSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInSesionActionPerformed
-        String username = jtxtUsuario.getText().trim();
+        String email = jtxtEmail.getText().trim();
         String password = new String(jtxtPass.getPassword()).trim();
+        String username = "NOMBRE";
 
         // Validar si el campo de usuario está vacío
-        if (username.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingresa tu nombre de usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa tu correo electrónico.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -237,16 +244,19 @@ public class FormLogin extends javax.swing.JFrame {
 
         // Si los campos no están vacíos, intenta iniciar sesión
         consultas con = new consultas();
-        boolean loginSuccess = con.consultarUsuario(username, password);
+        boolean loginSuccess = con.consultarUsuario(email, password);
 
         // Validar el resultado de la consulta
         if (loginSuccess) {
-            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-            // Redirige al usuario a la pantalla principal o la funcionalidad deseada
-            // ejemplo: new MainScreen().setVisible(true);
+            //JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+            
+            
+            Homepage hp = new Homepage();
+            hp.setVisible(true);
+            this.setVisible(false); 
             // this.dispose(); // Cerrar la ventana de inicio de sesión
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos. Inténtalo de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInSesionActionPerformed
 
@@ -304,8 +314,8 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel jpLogin;
+    private javax.swing.JTextField jtxtEmail;
     private javax.swing.JPasswordField jtxtPass;
-    private javax.swing.JTextField jtxtUsuario;
     private javax.swing.JLabel lblForgtPass;
     private javax.swing.JLabel lblPass;
     // End of variables declaration//GEN-END:variables
