@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Formularios;
 
 import Clases.consultas;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,9 +11,8 @@ import javax.swing.JOptionPane;
  */
 public class FormRegistro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormRegistro
-     */
+    int xMouse, yMouse;
+    
     public FormRegistro() {
         initComponents();
         //Centra la ventanada al iniciar
@@ -33,157 +29,236 @@ public class FormRegistro extends javax.swing.JFrame {
     private void initComponents() {
 
         jpFormRegistro = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jTextClave = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JSeparator();
+        header = new javax.swing.JPanel();
+        exitBtn = new javax.swing.JPanel();
+        exitTxt = new javax.swing.JLabel();
+        favicon = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
+        UsuarioLabel = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextEmail = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        emailLabel = new javax.swing.JLabel();
+        jtxtEmail = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
+        passLabel = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnVolver = new javax.swing.JPanel();
+        btnVolverTxt = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JPanel();
+        btnGuardarTxt = new javax.swing.JLabel();
+        jtxtPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+        setResizable(false);
 
-        jpFormRegistro.setBackground(new java.awt.Color(112, 145, 255));
-        jpFormRegistro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jpFormRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        jpFormRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Sans", 1, 18)); // NOI18N
-        jLabel1.setText("Registro");
-
-        jLabel2.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabel2.setText("Contraseña:");
-
-        jLabel3.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabel3.setText("Nombre de usuario:");
-
-        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-
-        jTextClave.setBackground(new java.awt.Color(112, 145, 255));
-        jTextClave.setForeground(new java.awt.Color(255, 255, 255));
-        jTextClave.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextClave.setBorder(null);
-
-        btnGuardar.setBackground(new java.awt.Color(204, 204, 204));
-        btnGuardar.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        btnGuardar.setText("Guardar");
-        btnGuardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+        header.setBackground(new java.awt.Color(255, 255, 255));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
             }
         });
 
-        btnVolver.setBackground(new java.awt.Color(204, 204, 204));
-        btnVolver.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/previous.png"))); // NOI18N
-        btnVolver.setText("Volver ");
-        btnVolver.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
+
+        exitTxt.setFont(new java.awt.Font("Roboto Light", 0, 24)); // NOI18N
+        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitTxt.setText("X");
+        exitTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        exitTxt.setPreferredSize(new java.awt.Dimension(40, 40));
+        exitTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitTxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitTxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitTxtMouseExited(evt);
             }
         });
+
+        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
+        exitBtn.setLayout(exitBtnLayout);
+        exitBtnLayout.setHorizontalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        exitBtnLayout.setVerticalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
+        header.setLayout(headerLayout);
+        headerLayout.setHorizontalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                    .addGap(0, 560, Short.MAX_VALUE)
+                    .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        headerLayout.setVerticalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+            .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(headerLayout.createSequentialGroup()
+                    .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jpFormRegistro.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 30));
+
+        favicon.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        favicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logoXS.png"))); // NOI18N
+        favicon.setText("  Sietemesinos");
+        jpFormRegistro.add(favicon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 160, 40));
+
+        title.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
+        title.setText("Registrarse");
+        jpFormRegistro.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        UsuarioLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        UsuarioLabel.setText("Nombre de usuario:");
+        jpFormRegistro.add(UsuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        jTextNombre.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextNombre.setForeground(new java.awt.Color(204, 204, 204));
+        jTextNombre.setText("Ingrese su nombre de usuario");
+        jTextNombre.setBorder(null);
+        jTextNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextNombreMousePressed(evt);
+            }
+        });
+        jTextNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombreActionPerformed(evt);
+            }
+        });
+        jpFormRegistro.add(jTextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 330, 30));
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jpFormRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 330, 18));
 
-        jTextNombre.setBackground(new java.awt.Color(112, 145, 255));
-        jTextNombre.setForeground(new java.awt.Color(255, 255, 255));
-        jTextNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextNombre.setBorder(null);
+        emailLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        emailLabel.setText("Correo electrónico:");
+        jpFormRegistro.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jLabel4.setText("Correo electrónico:");
-
-        jTextEmail.setBackground(new java.awt.Color(112, 145, 255));
-        jTextEmail.setForeground(new java.awt.Color(255, 255, 255));
-        jTextEmail.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextEmail.setBorder(null);
+        jtxtEmail.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jtxtEmail.setForeground(new java.awt.Color(204, 204, 204));
+        jtxtEmail.setText("Ingrese su correo");
+        jtxtEmail.setBorder(null);
+        jtxtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtxtEmailMousePressed(evt);
+            }
+        });
+        jtxtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtEmailActionPerformed(evt);
+            }
+        });
+        jpFormRegistro.add(jtxtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 330, 30));
 
         jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jpFormRegistro.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 330, 18));
 
-        javax.swing.GroupLayout jpFormRegistroLayout = new javax.swing.GroupLayout(jpFormRegistro);
-        jpFormRegistro.setLayout(jpFormRegistroLayout);
-        jpFormRegistroLayout.setHorizontalGroup(
-            jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormRegistroLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(177, 177, 177))
-            .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel3)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFormRegistroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)))
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator3)
-                            .addComponent(jTextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextClave, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+        passLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        passLabel.setText("Contraseña:");
+        jpFormRegistro.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+
+        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jpFormRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 330, 18));
+
+        btnVolver.setBackground(new java.awt.Color(118, 183, 235));
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnVolverTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnVolverTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnVolverTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/previous.png"))); // NOI18N
+        btnVolverTxt.setText("  VOLVER");
+        btnVolverTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolverTxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolverTxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolverTxtMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnVolverLayout = new javax.swing.GroupLayout(btnVolver);
+        btnVolver.setLayout(btnVolverLayout);
+        btnVolverLayout.setHorizontalGroup(
+            btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnVolverTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
-        jpFormRegistroLayout.setVerticalGroup(
-            jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpFormRegistroLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addGroup(jpFormRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+        btnVolverLayout.setVerticalGroup(
+            btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnVolverTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
+
+        jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 100, 40));
+
+        btnGuardar.setBackground(new java.awt.Color(118, 183, 235));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnGuardarTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnGuardarTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardarTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/save.png"))); // NOI18N
+        btnGuardarTxt.setText("GUARDAR");
+        btnGuardarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarTxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarTxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGuardarTxtMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnGuardarLayout = new javax.swing.GroupLayout(btnGuardar);
+        btnGuardar.setLayout(btnGuardarLayout);
+        btnGuardarLayout.setHorizontalGroup(
+            btnGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnGuardarLayout.createSequentialGroup()
+                .addComponent(btnGuardarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        btnGuardarLayout.setVerticalGroup(
+            btnGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnGuardarTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        jpFormRegistro.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, -1));
+
+        jtxtPass.setForeground(new java.awt.Color(204, 204, 204));
+        jtxtPass.setText("***********");
+        jtxtPass.setBorder(null);
+        jtxtPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtxtPassMousePressed(evt);
+            }
+        });
+        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 330, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,24 +268,81 @@ public class FormRegistro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpFormRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jpFormRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitTxtMouseClicked
+
+    private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered
+        exitBtn.setBackground(Color.red);
+        exitTxt.setForeground(Color.white);
+    }//GEN-LAST:event_exitTxtMouseEntered
+
+    private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
+        exitBtn.setBackground(Color.white);
+        exitTxt.setForeground(Color.black);
+    }//GEN-LAST:event_exitTxtMouseExited
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void jTextNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextNombreMousePressed
+        if (jTextNombre.getText().equals("Ingrese su nombre de usuario")){
+            jTextNombre.setText("");
+            jTextNombre.setForeground(Color.black);
+        }
+        if (jtxtEmail.getText().isEmpty()){
+            jtxtEmail.setText("Ingrese su correo");
+            jtxtEmail.setForeground(Color.gray);
+        }
+        if (String.valueOf(jtxtPass.getPassword()).isEmpty()){
+            jtxtPass.setText("***********");
+            jtxtPass.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_jTextNombreMousePressed
+
+    private void jTextNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreActionPerformed
+
+    private void jtxtPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtPassMousePressed
+        if (String.valueOf(jtxtPass.getPassword()).equals("***********")){
+            jtxtPass.setText("");
+            jtxtPass.setForeground(Color.black);
+        }
+        if (jTextNombre.getText().isEmpty()){
+            jTextNombre.setText("Ingrese su nombre de usuario");
+            jTextNombre.setForeground(Color.gray);
+        }
+        if (jtxtEmail.getText().isEmpty()){
+            jtxtEmail.setText("Ingrese su correo");
+            jtxtEmail.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_jtxtPassMousePressed
+
+    private void btnVolverTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseClicked
         this.setVisible(false);
         FormLogin fr2 = new FormLogin();
         fr2.setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_btnVolverTxtMouseClicked
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarTxtMouseClicked
         String nombreUsuario = jTextNombre.getText().trim();
-        String claveUsuario = jTextClave.getText().trim();
-        String emailUsuario = jTextEmail.getText().trim();
+        String claveUsuario = String.valueOf(jtxtPass.getPassword()).trim();
+        String emailUsuario = jTextNombre.getText().trim();
 
         if (nombreUsuario.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingresa un nombre de usuario válido.");
@@ -243,7 +375,42 @@ public class FormRegistro extends javax.swing.JFrame {
             //Error en el registro (por ejemplo, usuario duplicado)
             JOptionPane.showMessageDialog(this, "Error al registrar el usuario. Intenta con un nombre diferente.");
         }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarTxtMouseClicked
+
+    private void btnVolverTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseEntered
+        btnVolver.setBackground(new Color(132, 200, 245));
+    }//GEN-LAST:event_btnVolverTxtMouseEntered
+
+    private void btnVolverTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseExited
+        btnVolver.setBackground(new Color(118, 183, 235));
+    }//GEN-LAST:event_btnVolverTxtMouseExited
+
+    private void btnGuardarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarTxtMouseEntered
+        btnGuardar.setBackground(new Color(132, 200, 245));
+    }//GEN-LAST:event_btnGuardarTxtMouseEntered
+
+    private void btnGuardarTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarTxtMouseExited
+        btnGuardar.setBackground(new Color(118, 183, 235));
+    }//GEN-LAST:event_btnGuardarTxtMouseExited
+
+    private void jtxtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtEmailMousePressed
+        if (jtxtEmail.getText().equals("Ingrese su correo")){
+            jtxtEmail.setText("");
+            jtxtEmail.setForeground(Color.black);
+        }
+        if (jTextNombre.getText().isEmpty()){
+            jTextNombre.setText("Ingrese su nombre de usuario");
+            jTextNombre.setForeground(Color.gray);
+        }
+        if (String.valueOf(jtxtPass.getPassword()).isEmpty()){
+            jtxtPass.setText("***********");
+            jtxtPass.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_jtxtEmailMousePressed
+
+    private void jtxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,18 +448,24 @@ public class FormRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnVolver;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel UsuarioLabel;
+    private javax.swing.JPanel btnGuardar;
+    private javax.swing.JLabel btnGuardarTxt;
+    private javax.swing.JPanel btnVolver;
+    private javax.swing.JLabel btnVolverTxt;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JPanel exitBtn;
+    private javax.swing.JLabel exitTxt;
+    private javax.swing.JLabel favicon;
+    private javax.swing.JPanel header;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextClave;
-    private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JPanel jpFormRegistro;
+    private javax.swing.JTextField jtxtEmail;
+    private javax.swing.JPasswordField jtxtPass;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
