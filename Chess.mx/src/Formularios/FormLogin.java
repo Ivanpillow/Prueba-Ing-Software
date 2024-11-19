@@ -64,14 +64,14 @@ public class FormLogin extends javax.swing.JFrame {
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginavatarS.png"))); // NOI18N
-        Background.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 320, 150));
+        Background.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 340, 150));
 
         logoname.setBackground(new java.awt.Color(255, 255, 255));
         logoname.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
         logoname.setForeground(new java.awt.Color(255, 255, 255));
         logoname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoname.setText("CHESS.MX");
-        Background.add(logoname, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 320, 20));
+        Background.add(logoname, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 340, 20));
 
         extBtn.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -342,16 +342,15 @@ public class FormLogin extends javax.swing.JFrame {
     private void btnInSesionTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInSesionTxtMouseClicked
         String email = jtxtEmail.getText().trim();
         String password = new String(jtxtPass.getPassword()).trim();
-        String username = "NOMBRE";
 
         // Validar si el campo de usuario está vacío
-        if (email.isEmpty()) {
+        if (jtxtEmail.getText().equals("Ingrese su correo")) {
             JOptionPane.showMessageDialog(this, "Por favor ingresa tu correo electrónico.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Validar si el campo de contraseña está vacío
-        if (password.isEmpty()) {
+        if (String.valueOf(jtxtPass.getPassword()).equals("***********")) {
             JOptionPane.showMessageDialog(this, "Por favor ingresa tu contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }

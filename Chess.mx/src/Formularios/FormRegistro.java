@@ -34,29 +34,30 @@ public class FormRegistro extends javax.swing.JFrame {
         exitTxt = new javax.swing.JLabel();
         favicon = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
-        UsuarioLabel = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        emailLabel = new javax.swing.JLabel();
         jtxtEmail = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
-        passLabel = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnVolver = new javax.swing.JPanel();
         btnVolverTxt = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JPanel();
         btnGuardarTxt = new javax.swing.JLabel();
         jtxtPass = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
 
-        jpFormRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        jpFormRegistro.setBackground(new java.awt.Color(223, 224, 224));
         jpFormRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         header.setBackground(new java.awt.Color(255, 255, 255));
+        header.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 headerMouseDragged(evt);
@@ -122,19 +123,17 @@ public class FormRegistro extends javax.swing.JFrame {
         favicon.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         favicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logoXS.png"))); // NOI18N
         favicon.setText("  Sietemesinos");
-        jpFormRegistro.add(favicon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 160, 40));
+        jpFormRegistro.add(favicon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 160, 40));
 
         title.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         title.setText("Registrarse");
-        jpFormRegistro.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jpFormRegistro.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        UsuarioLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        UsuarioLabel.setText("Nombre de usuario:");
-        jpFormRegistro.add(UsuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
-
+        jTextNombre.setBackground(new java.awt.Color(223, 224, 224));
         jTextNombre.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jTextNombre.setForeground(new java.awt.Color(204, 204, 204));
-        jTextNombre.setText("Ingrese su nombre de usuario");
+        jTextNombre.setForeground(new java.awt.Color(153, 153, 153));
+        jTextNombre.setText(" Ingrese su nombre de usuario");
+        jTextNombre.setToolTipText("");
         jTextNombre.setBorder(null);
         jTextNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -146,19 +145,16 @@ public class FormRegistro extends javax.swing.JFrame {
                 jTextNombreActionPerformed(evt);
             }
         });
-        jpFormRegistro.add(jTextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 330, 30));
+        jpFormRegistro.add(jTextNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 330, 30));
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jpFormRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 330, 18));
+        jpFormRegistro.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 330, 18));
 
-        emailLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        emailLabel.setText("Correo electrónico:");
-        jpFormRegistro.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
-
+        jtxtEmail.setBackground(new java.awt.Color(223, 224, 224));
         jtxtEmail.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jtxtEmail.setForeground(new java.awt.Color(204, 204, 204));
-        jtxtEmail.setText("Ingrese su correo");
+        jtxtEmail.setForeground(new java.awt.Color(153, 153, 153));
+        jtxtEmail.setText(" Ingrese su correo");
         jtxtEmail.setBorder(null);
         jtxtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -170,19 +166,15 @@ public class FormRegistro extends javax.swing.JFrame {
                 jtxtEmailActionPerformed(evt);
             }
         });
-        jpFormRegistro.add(jtxtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 330, 30));
+        jpFormRegistro.add(jtxtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 330, 30));
 
         jSeparator4.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jpFormRegistro.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 330, 18));
-
-        passLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        passLabel.setText("Contraseña:");
-        jpFormRegistro.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+        jpFormRegistro.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 330, 18));
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jpFormRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 330, 18));
+        jpFormRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 330, 18));
 
         btnVolver.setBackground(new java.awt.Color(118, 183, 235));
         btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,7 +206,7 @@ public class FormRegistro extends javax.swing.JFrame {
             .addComponent(btnVolverTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 100, 40));
+        jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 100, 40));
 
         btnGuardar.setBackground(new java.awt.Color(118, 183, 235));
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -248,17 +240,27 @@ public class FormRegistro extends javax.swing.JFrame {
             .addComponent(btnGuardarTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jpFormRegistro.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, -1));
+        jpFormRegistro.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, -1, -1));
 
-        jtxtPass.setForeground(new java.awt.Color(204, 204, 204));
-        jtxtPass.setText("***********");
+        jtxtPass.setBackground(new java.awt.Color(223, 224, 224));
+        jtxtPass.setForeground(new java.awt.Color(153, 153, 153));
+        jtxtPass.setText(" ***********");
         jtxtPass.setBorder(null);
         jtxtPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jtxtPassMousePressed(evt);
             }
         });
-        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, 330, 30));
+        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 330, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/key.png"))); // NOI18N
+        jpFormRegistro.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/userLabel.png"))); // NOI18N
+        jpFormRegistro.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/correoIconS.png"))); // NOI18N
+        jpFormRegistro.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 30, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -300,16 +302,16 @@ public class FormRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_headerMouseDragged
 
     private void jTextNombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextNombreMousePressed
-        if (jTextNombre.getText().equals("Ingrese su nombre de usuario")){
+        if (jTextNombre.getText().equals(" Ingrese su nombre de usuario")){
             jTextNombre.setText("");
             jTextNombre.setForeground(Color.black);
         }
         if (jtxtEmail.getText().isEmpty()){
-            jtxtEmail.setText("Ingrese su correo");
+            jtxtEmail.setText(" Ingrese su correo");
             jtxtEmail.setForeground(Color.gray);
         }
         if (String.valueOf(jtxtPass.getPassword()).isEmpty()){
-            jtxtPass.setText("***********");
+            jtxtPass.setText(" ***********");
             jtxtPass.setForeground(Color.gray);
         }
     }//GEN-LAST:event_jTextNombreMousePressed
@@ -319,16 +321,16 @@ public class FormRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextNombreActionPerformed
 
     private void jtxtPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtPassMousePressed
-        if (String.valueOf(jtxtPass.getPassword()).equals("***********")){
+        if (String.valueOf(jtxtPass.getPassword()).equals(" ***********")){
             jtxtPass.setText("");
             jtxtPass.setForeground(Color.black);
         }
         if (jTextNombre.getText().isEmpty()){
-            jTextNombre.setText("Ingrese su nombre de usuario");
+            jTextNombre.setText(" Ingrese su nombre de usuario");
             jTextNombre.setForeground(Color.gray);
         }
         if (jtxtEmail.getText().isEmpty()){
-            jtxtEmail.setText("Ingrese su correo");
+            jtxtEmail.setText(" Ingrese su correo");
             jtxtEmail.setForeground(Color.gray);
         }
     }//GEN-LAST:event_jtxtPassMousePressed
@@ -345,18 +347,18 @@ public class FormRegistro extends javax.swing.JFrame {
         String emailUsuario = jTextNombre.getText().trim();
 
         if (nombreUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa un nombre de usuario válido.");
+            JOptionPane.showMessageDialog(this, " Ingresa un nombre de usuario válido.");
             return;
         }
 
         if (emailUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa un correo válido.");
+            JOptionPane.showMessageDialog(this, " Ingresa un correo válido.");
             return;
         }
         
         //if (claveUsuario.isEmpty() || claveUsuario.length() < 8) {
         if (claveUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa una contraseña válida.");
+            JOptionPane.showMessageDialog(this, " Ingresa una contraseña válida.");
             return;
         }
         
@@ -394,16 +396,16 @@ public class FormRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarTxtMouseExited
 
     private void jtxtEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtxtEmailMousePressed
-        if (jtxtEmail.getText().equals("Ingrese su correo")){
+        if (jtxtEmail.getText().equals(" Ingrese su correo")){
             jtxtEmail.setText("");
             jtxtEmail.setForeground(Color.black);
         }
         if (jTextNombre.getText().isEmpty()){
-            jTextNombre.setText("Ingrese su nombre de usuario");
+            jTextNombre.setText(" Ingrese su nombre de usuario");
             jTextNombre.setForeground(Color.gray);
         }
         if (String.valueOf(jtxtPass.getPassword()).isEmpty()){
-            jtxtPass.setText("***********");
+            jtxtPass.setText(" ***********");
             jtxtPass.setForeground(Color.gray);
         }
     }//GEN-LAST:event_jtxtEmailMousePressed
@@ -448,16 +450,17 @@ public class FormRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel UsuarioLabel;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JLabel btnGuardarTxt;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JLabel btnVolverTxt;
-    private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JLabel favicon;
     private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -465,7 +468,6 @@ public class FormRegistro extends javax.swing.JFrame {
     private javax.swing.JPanel jpFormRegistro;
     private javax.swing.JTextField jtxtEmail;
     private javax.swing.JPasswordField jtxtPass;
-    private javax.swing.JLabel passLabel;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
