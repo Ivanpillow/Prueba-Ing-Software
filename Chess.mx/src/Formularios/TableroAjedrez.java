@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -64,7 +65,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     Pieza pieza = tablero.getPieza(fila, col);
                     if (pieza != null) {
                         Image img = new ImageIcon(pieza.getImagenPath()).getImage();
-                        System.out.println("Cargando imagen desde: " + pieza.getImagenPath());
+                        //System.out.println("Cargando imagen desde: " + pieza.getImagenPath());
 
                         g.drawImage(img, col * tamanoCasilla, fila * tamanoCasilla, tamanoCasilla, tamanoCasilla, this);
                     }
@@ -89,14 +90,18 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         if (pieza != null) {
                             casillaSeleccionadaX = col;
                             casillaSeleccionadaY = fila;
+                            //System.out.println("Fila: " + fila);
+                            //System.out.println("Columna: " + col);
                         }
                     } else {
-                        // Si ya hay pieza seleccionada, moverla a la nueva casilla
                         Pieza pieza = tablero.getPieza(casillaSeleccionadaY, casillaSeleccionadaX);
-                        tablero.setPieza(fila, col, pieza);
-                        tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
-                        
-                        // Resetear la casilla seleccionada
+                        if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo())) {
+                            tablero.setPieza(fila, col, pieza);
+                            tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
+                        }
+                        else{
+                             JOptionPane.showMessageDialog(TableroAjedrez.this, "El movimiento realizado no es válido", "Movimiento inválido: " + pieza.getTipo(), JOptionPane.ERROR_MESSAGE);
+                        }
                         casillaSeleccionadaX = -1;
                         casillaSeleccionadaY = -1;
                         repaint();
