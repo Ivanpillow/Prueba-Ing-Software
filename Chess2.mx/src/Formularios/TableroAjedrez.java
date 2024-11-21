@@ -24,30 +24,31 @@ public class TableroAjedrez extends javax.swing.JFrame {
 
     private Tablero tablero;
     private int casillaSeleccionadaX = -1, casillaSeleccionadaY = -1; // Coordenadas de la casilla seleccionada
-    
+    private boolean turnoBlanco = true;
+
     /**
      * Creates new form TableroAjedrez
      */
     public TableroAjedrez() {
         setSize(680, 680); // Tamaño del tablero
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         // Crear tablero
         tablero = new Tablero();
-        
+
         // Añadir el panel donde se dibuja el tablero
         add(new PanelTablero());
-        
+
         // Hacer que la ventana se cierre correctamente
         setLocationRelativeTo(null); // Centrar la ventana
     }
-    
+
     class PanelTablero extends JPanel {
-        
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            
+
             int tamanoCasilla = 80; // Tamaño de cada casilla
             boolean colorClaro = true; // Usado para alternar colores de las casillas
             for (int fila = 0; fila < 8; fila++) {
@@ -60,7 +61,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     }
                     g.fillRect(col * tamanoCasilla, fila * tamanoCasilla, tamanoCasilla, tamanoCasilla);
                     colorClaro = !colorClaro;
-                    
+
                     // Dibujar las piezas
                     Pieza pieza = tablero.getPieza(fila, col);
                     if (pieza != null) {
@@ -85,28 +86,42 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     int col = x / 80;
                     
                     if (casillaSeleccionadaX == -1 && casillaSeleccionadaY == -1) {
-                        // Si no hay pieza seleccionada, seleccionar una pieza
+                        // Seleccionar pieza
                         Pieza pieza = tablero.getPieza(fila, col);
                         if (pieza != null) {
-                            casillaSeleccionadaX = col;
-                            casillaSeleccionadaY = fila;
-                            //System.out.println("Fila: " + fila);
-                            //System.out.println("Columna: " + col);
+                            // Validar si la pieza pertenece al turno actual
+                            if ((turnoBlanco && pieza.getColor().equals("Blanco"))
+                                    || (!turnoBlanco && pieza.getColor().equals("Negro"))) {
+                                casillaSeleccionadaX = col;
+                                casillaSeleccionadaY = fila;
+                            } else {
+                                String jugador = turnoBlanco ? "Blancas" : "Negras";
+                                JOptionPane.showMessageDialog(TableroAjedrez.this,
+                                        "Es el turno de " + jugador, "Turno incorrecto", JOptionPane.WARNING_MESSAGE);
+                            }
                         }
                     } else {
+                        // Mover pieza seleccionada
                         Pieza pieza = tablero.getPieza(casillaSeleccionadaY, casillaSeleccionadaX);
                         if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo())) {
                             tablero.setPieza(fila, col, pieza);
                             tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
-                        }
-                        else{
-                             JOptionPane.showMessageDialog(TableroAjedrez.this, "El movimiento realizado no es válido", "Movimiento inválido: " + pieza.getTipo(), JOptionPane.ERROR_MESSAGE);
+
+                            // Cambiar turno
+                            turnoBlanco = !turnoBlanco;
+                            String jugador = turnoBlanco ? "Blancas" : "Negras";
+                            JOptionPane.showMessageDialog(TableroAjedrez.this,
+                                    "Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(TableroAjedrez.this,
+                                    "El movimiento realizado no es válido", "Movimiento inválido: " + pieza.getTipo(), JOptionPane.ERROR_MESSAGE);
                         }
                         casillaSeleccionadaX = -1;
                         casillaSeleccionadaY = -1;
                         repaint();
                     }
                 }
+
             });
         }
     }
@@ -126,11 +141,11 @@ public class TableroAjedrez extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
 
         pack();
