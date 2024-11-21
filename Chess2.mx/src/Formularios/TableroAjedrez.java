@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Formularios;
 
 import Clases.Pieza;
@@ -26,20 +23,22 @@ public class TableroAjedrez extends javax.swing.JFrame {
     private int casillaSeleccionadaX = -1, casillaSeleccionadaY = -1; // Coordenadas de la casilla seleccionada
     private boolean turnoBlanco = true;
 
-    /**
-     * Creates new form TableroAjedrez
-     */
     public TableroAjedrez() {
-        setSize(680, 680); // Tamaño del tablero
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         // Crear tablero
         tablero = new Tablero();
 
         // Añadir el panel donde se dibuja el tablero
-        add(new PanelTablero());
+        PanelTablero panelTablero = new PanelTablero();
+        add(panelTablero);
 
-        // Hacer que la ventana se cierre correctamente
+        // Configurar el tamaño preferido del panel
+        panelTablero.setPreferredSize(new java.awt.Dimension(640, 640)); // Tamaño exacto del tablero (8x8 casillas de 80px)
+
+        // Ajustar el tamaño del JFrame automáticamente al contenido
+        pack();
+
+        // Configurar la ventana
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar la ventana
     }
 

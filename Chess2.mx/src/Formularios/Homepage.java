@@ -38,6 +38,8 @@ public class Homepage extends javax.swing.JFrame {
         btnClasiftxt = new javax.swing.JLabel();
         btnVolver = new javax.swing.JPanel();
         btnVolverTxt = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -206,6 +208,14 @@ public class Homepage extends javax.swing.JFrame {
 
         btnNuevaPartida1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 100, 40));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/starIconS.png"))); // NOI18N
+        btnNuevaPartida1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 40, 40));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/plusIconS.png"))); // NOI18N
+        btnNuevaPartida1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,6 +331,8 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel extBtn;
     private javax.swing.JLabel extTxt;
     private javax.swing.JLabel iconUser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JLabel lblBackground;
     // End of variables declaration//GEN-END:variables
