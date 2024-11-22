@@ -1,4 +1,3 @@
-
 package Clases;
 
 /**
@@ -28,16 +27,16 @@ public class Pieza {
     public String getImagenPath() {
         return imagenPath;
     }
-    
-    public void setTipo(String tipo){
+
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    public void setColor(String color){
+
+    public void setColor(String color) {
         this.color = color;
     }
-    
-    public void setImagenPath(String path){
+
+    public void setImagenPath(String path) {
         this.imagenPath = path;
     }
 
@@ -66,20 +65,31 @@ public class Pieza {
 
     private boolean validarMovimientoPeon(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero) {
         int direccion = color.equals("Blanco") ? -1 : 1; // Blanco sube, negro baja
-        /*
-        origenCol == destinoCol es para verificar que solo se pueda mover de forma vertical
-        tablero.getPieza(destinoFila, destinoCol) == null para verificar que el destino a donde se
-        quiere mover el peón no haya una pieza
-         */
+
+        // Movimiento hacia adelante (una o dos casillas)
         if (origenCol == destinoCol && tablero.getPieza(destinoFila, destinoCol) == null) {
-            // Movimiento hacia adelante
+            // Movimiento normal o doble
             return destinoFila - origenFila == direccion
                     || (origenFila == (color.equals("Blanco") ? 6 : 1) && destinoFila - origenFila == 2 * direccion);
-        } else if (Math.abs(destinoCol - origenCol) == 1 && destinoFila - origenFila == direccion) {
-            // Captura en diagonal
-            return tablero.getPieza(destinoFila, destinoCol) != null
-                    && !tablero.getPieza(destinoFila, destinoCol).getColor().equals(color);
         }
+
+        // Captura en diagonal
+        if (Math.abs(destinoCol - origenCol) == 1 && destinoFila - origenFila == direccion) {
+            // Captura normal
+            if (tablero.getPieza(destinoFila, destinoCol) != null
+                    && !tablero.getPieza(destinoFila, destinoCol).getColor().equals(color)) {
+                return true;
+            }
+
+            // Captura al paso
+            if (tablero.getPeonDobleCasilla() != null) {
+                int[] peonDoble = tablero.getPeonDobleCasilla();
+                if (peonDoble[0] == origenFila && peonDoble[1] == destinoCol) { // Peón adyacente hizo un movimiento doble
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -253,18 +263,5 @@ public class Pieza {
         // Si no se cumple la condición, el movimiento no es válido
         return false;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }

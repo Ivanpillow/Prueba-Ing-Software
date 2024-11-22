@@ -10,21 +10,24 @@ import javax.swing.JOptionPane;
 public class Tablero {
 
     private Pieza[][] tablero; //8x8 matriz para almacenar las piezas
+    private int[] peonDobleCasilla; // Guarda la posición del peón que se movió dos casillas
 
     // Constructor
     public Tablero() {
         tablero = new Pieza[8][8];
+        peonDobleCasilla = null;
         inicializarTablero();
     }
 
     //Inicializar el tablero con las piezas en las posiciones iniciales
     private void inicializarTablero() {
         //Path base para las imagenes
-                        
-        /****************************************
-        CAMBIEN EL VALOR DE directorioBase
-        PARA QUE SE CARGUEN BIEN LAS IMÁGENES
-        ****************************************/
+
+        /**
+         * **************************************
+         * CAMBIEN EL VALOR DE directorioBase PARA QUE SE CARGUEN BIEN LAS
+         * IMÁGENES **************************************
+         */
         String directorioBase = "C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
 
         //piezas principales
@@ -37,7 +40,7 @@ public class Tablero {
         //Conf de piezas principales (fila 0 para negras, fila 7 para blancas)
         for (int col = 0; col < 8; col++) {
             // Piezas negras
-            //tablero[0][col] = new Pieza(nombresPiezasNegro[col], "Negro", directorioBase + piezasPrincipalesNegro[col]);
+            tablero[0][col] = new Pieza(nombresPiezasNegro[col], "Negro", directorioBase + piezasPrincipalesNegro[col]);
             // Piezas blancas
             tablero[7][col] = new Pieza(nombresPiezasBlanco[col], "Blanco", directorioBase + piezasPrincipalesBlanco[col]);
         }
@@ -45,7 +48,7 @@ public class Tablero {
         // Configuración de los peones
         for (int col = 0; col < 8; col++) {
             // Peones negros
-            //tablero[1][col] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
+            tablero[1][col] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
             // Peones blancos
             tablero[6][col] = new Pieza("Peon", "Blanco", directorioBase + "white_pawn.png");
         }
@@ -59,6 +62,14 @@ public class Tablero {
     // Establecer una pieza en una posición específica
     public void setPieza(int fila, int col, Pieza pieza) {
         tablero[fila][col] = pieza;
+    }
+
+    public int[] getPeonDobleCasilla() {
+        return peonDobleCasilla;
+    }
+
+    public void setPeonDobleCasilla(int[] peonDobleCasilla) {
+        this.peonDobleCasilla = peonDobleCasilla;
     }
 
     public void coronacionPeon(Pieza pieza, int fila, boolean turno) {
@@ -76,13 +87,13 @@ public class Tablero {
                         opciones,
                         opciones[0]);
                 String color = turno ? "white_" : "black_";
-                
-                /****************************************
-                CAMBIEN LAS PATHS DE ACUERDO A SU ENTORNO
-                DEL SWITCH DE AQUI ADELANTE PARA QUE SE
-                CARGUEN BIEN LAS IMÁGENES
-                ****************************************/
 
+                /**
+                 * **************************************
+                 * CAMBIEN LAS PATHS DE ACUERDO A SU ENTORNO DEL SWITCH DE AQUI
+                 * ADELANTE PARA QUE SE CARGUEN BIEN LAS IMÁGENES
+                 * **************************************
+                 */
                 if (seleccion != null) {
                     switch (seleccion) {
                         case "Reina":
@@ -104,6 +115,23 @@ public class Tablero {
                     }
                 }
             }
+        }
+    }
+
+    public void capturaAlPaso(Pieza pieza, int fila, int col, int casillaSeleccionadaY) {
+        // Captura al paso: eliminar el peón capturado si aplica
+        if (pieza.getTipo().equals("Peon") && this.getPeonDobleCasilla() != null) {
+            int[] peonDoble = this.getPeonDobleCasilla();
+            if (peonDoble[0] == casillaSeleccionadaY && peonDoble[1] == col) {
+                this.setPieza(peonDoble[0], peonDoble[1], null); // Elimina el peón capturado
+            }
+        }
+
+        // Actualizar posición del peón si hizo un movimiento doble
+        if (pieza.getTipo().equals("Peon") && Math.abs(fila - casillaSeleccionadaY) == 2) {
+            this.setPeonDobleCasilla(new int[]{fila, col});
+        } else {
+            this.setPeonDobleCasilla(null); // Resetear si no es un movimiento doble
         }
     }
 }

@@ -88,7 +88,6 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         Pieza pieza = tablero.getPieza(fila, col);
                         if (pieza != null) {
                             // Validar si la pieza pertenece al turno actual
-                            
                             if ((turnoBlanco && pieza.getColor().equals("Blanco"))
                                     || (!turnoBlanco && pieza.getColor().equals("Negro"))) {
                                 casillaSeleccionadaX = col;
@@ -103,14 +102,20 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         // Mover pieza seleccionada
                         Pieza pieza = tablero.getPieza(casillaSeleccionadaY, casillaSeleccionadaX);
                         if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo())) {
+                            //Si se quiere mover un peón, checar si se puede hacer captura al paso
+                            if (pieza.getTipo().equals("Peon")) {
+                                tablero.capturaAlPaso(pieza, fila, col, casillaSeleccionadaY);
+                            }
+
+                            // Realizar el movimiento
                             tablero.setPieza(fila, col, pieza);
                             tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
-                            
-                            //Función que se encarga de promocionar el peón
+
+                            // Función que se encarga de promocionar el peón
                             tablero.coronacionPeon(pieza, fila, turnoBlanco);
 
                             // Cambiar turno
-                            //turnoBlanco = !turnoBlanco;
+                            turnoBlanco = !turnoBlanco;
                             String jugador = turnoBlanco ? "Blancas" : "Negras";
                             JOptionPane.showMessageDialog(TableroAjedrez.this,
                                     "Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);
