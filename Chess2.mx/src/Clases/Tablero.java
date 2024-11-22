@@ -113,7 +113,7 @@ public class Tablero {
                         null,
                         opciones,
                         opciones[0]);
-                String color = turno ? "white_" : "black_";
+                String color = pieza.getColor().equals("Blanco") ? "white_" : "black_";
 
                 /**
                  * **************************************
@@ -225,7 +225,7 @@ public class Tablero {
         return false;
     }
 
-    // Métodos para actualizar el estado del rey y las torres
+    //Verificar si los reyes se movieron durante la partida o no(para el enroque)
     public void setReyBlancoMovido(boolean movido) {
         this.reyBlancoMovido = movido;
     }
@@ -234,7 +234,7 @@ public class Tablero {
         this.reyNegroMovido = movido;
     }
 
-    // Similar para las torres
+    //Verificar si las torres se movieron durante la partida o no(para el enroque)
     public void setTorreBlancaIzquierdaMovida(boolean movida) {
         this.torreBlancaIzquierdaMovida = movida;
     }

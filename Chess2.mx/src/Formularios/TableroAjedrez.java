@@ -130,8 +130,8 @@ public class TableroAjedrez extends javax.swing.JFrame {
                             tablero.coronacionPeon(pieza, fila, turnoBlanco);
 
                             String jugador = turnoBlanco ? "Blancas" : "Negras";
-                            JOptionPane.showMessageDialog(TableroAjedrez.this,
-                                    "Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);
+                            //JOptionPane.showMessageDialog(TableroAjedrez.this,
+                                    //"Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(TableroAjedrez.this,
                                     "El movimiento realizado no es válido", "Movimiento inválido: " + pieza.getTipo(), JOptionPane.ERROR_MESSAGE);
