@@ -101,7 +101,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     } else {
                         // Mover pieza seleccionada
                         Pieza pieza = tablero.getPieza(casillaSeleccionadaY, casillaSeleccionadaX);
-                        if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo())) {
+                        if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo(), pieza.getColor())) {
                             //Si se quiere mover un peón, checar si se puede hacer captura al paso
                             if (pieza.getTipo().equals("Peon")) {
                                 tablero.capturaAlPaso(pieza, fila, col, casillaSeleccionadaY);
@@ -111,11 +111,24 @@ public class TableroAjedrez extends javax.swing.JFrame {
                             tablero.setPieza(fila, col, pieza);
                             tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
 
+                            // Cambiar turno
+                            turnoBlanco = !turnoBlanco;
+
+                            // Verificar si el rey está en jaque después del movimiento
+                            int filaRey = (turnoBlanco) ? tablero.getFilaReyBlanco() : tablero.getFilaReyNegro();
+                            int colRey = (turnoBlanco) ? tablero.getColReyBlanco() : tablero.getColReyNegro();
+
+                            if (tablero.estaEnJaque(filaRey, colRey, (turnoBlanco) ? "Blanco" : "Negro", tablero)) {
+                                JOptionPane.showMessageDialog(TableroAjedrez.this, "¡El rey " + (turnoBlanco ? "Blanco" : "Negro") + " está en peligro!", "Jaque", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                            /*
+                            int[] p = pieza.getPosicion();
+                            System.out.println("Nueva posición: " + p[0] + ", " + p[1]);
+                             */
                             // Función que se encarga de promocionar el peón
                             tablero.coronacionPeon(pieza, fila, turnoBlanco);
 
-                            // Cambiar turno
-                            turnoBlanco = !turnoBlanco;
                             String jugador = turnoBlanco ? "Blancas" : "Negras";
                             JOptionPane.showMessageDialog(TableroAjedrez.this,
                                     "Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);

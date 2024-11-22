@@ -11,12 +11,16 @@ public class Tablero {
 
     private Pieza[][] tablero; //8x8 matriz para almacenar las piezas
     private int[] peonDobleCasilla; // Guarda la posición del peón que se movió dos casillas
+    private int[] posicionReyBlanco;
+    private int[] posicionReyNegro;
 
     // Constructor
     public Tablero() {
         tablero = new Pieza[8][8];
         peonDobleCasilla = null;
         inicializarTablero();
+        posicionReyBlanco = new int[]{7, 4};
+        posicionReyNegro = new int[]{0, 4};
     }
 
     //Inicializar el tablero con las piezas en las posiciones iniciales
@@ -41,16 +45,25 @@ public class Tablero {
         for (int col = 0; col < 8; col++) {
             // Piezas negras
             tablero[0][col] = new Pieza(nombresPiezasNegro[col], "Negro", directorioBase + piezasPrincipalesNegro[col]);
+            tablero[0][col].setPosicion(new int[]{0, col});
             // Piezas blancas
             tablero[7][col] = new Pieza(nombresPiezasBlanco[col], "Blanco", directorioBase + piezasPrincipalesBlanco[col]);
+            tablero[7][col].setPosicion(new int[]{7, col});
         }
+
+        //Guardar las posiciones del rey (sirve para lógica del jaque)
+        tablero[0][4].setPosicion(new int[]{0, 4});
+        tablero[7][4].setPosicion(new int[]{7, 4});
 
         // Configuración de los peones
         for (int col = 0; col < 8; col++) {
             // Peones negros
             tablero[1][col] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
+            tablero[1][col].setPosicion(new int[]{1, col});
             // Peones blancos
             tablero[6][col] = new Pieza("Peon", "Blanco", directorioBase + "white_pawn.png");
+            tablero[6][col].setPosicion(new int[]{6, col});
+
         }
     }
 
@@ -134,4 +147,48 @@ public class Tablero {
             this.setPeonDobleCasilla(null); // Resetear si no es un movimiento doble
         }
     }
+
+    public int getFilaReyBlanco() {
+        return posicionReyBlanco[0];
+    }
+
+    public int getFilaReyNegro() {
+        return posicionReyNegro[0];
+
+    }
+
+    public int getColReyBlanco() {
+        return posicionReyBlanco[1];
+
+    }
+
+    public int getColReyNegro() {
+        return posicionReyNegro[1];
+    }
+
+    public void setPosicionReyBlanco(int[] nuevaPosicion) {
+        posicionReyBlanco = nuevaPosicion;
+    }
+
+    public void setPosicionReyNegro(int[] nuevaPosicion) {
+        posicionReyNegro = nuevaPosicion;
+    }
+
+    public boolean estaEnJaque(int filaRey, int colRey, String colorRey, Tablero tablero) {
+        // Recorremos todo el tablero para buscar piezas enemigas
+        for (int fila = 0; fila < 8; fila++) {
+            for (int col = 0; col < 8; col++) {
+                Pieza pieza = tablero.getPieza(fila, col);
+                if (pieza != null && !pieza.getColor().equals(colorRey)) {
+                    // Si es una pieza enemiga, verificamos si puede atacar al rey
+                    if (pieza.validarMovimiento(fila, col, filaRey, colRey, tablero, pieza.getTipo(), pieza.getColor())) {
+                        // Si la pieza puede atacar al rey, el rey está en jaque
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; // El rey no está en jaque
+    }
+
 }

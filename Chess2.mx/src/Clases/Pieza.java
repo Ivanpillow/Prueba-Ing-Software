@@ -9,11 +9,13 @@ public class Pieza {
     private String tipo;
     private String color;
     private String imagenPath;
+    private int[] posicion;
 
     public Pieza(String tipo, String color, String imagenPath) {
         this.tipo = tipo;
         this.color = color;
         this.imagenPath = imagenPath;
+        this.posicion = null;
     }
 
     public String getTipo() {
@@ -28,6 +30,10 @@ public class Pieza {
         return imagenPath;
     }
 
+    public int[] getPosicion() {
+        return posicion;
+    }
+
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -40,11 +46,12 @@ public class Pieza {
         this.imagenPath = path;
     }
 
-    // Validar movimientos según el tipo de pieza
-    public boolean validarMovimiento(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero, String tipoPieza) {
-        int diferenciaFila = Math.abs(destinoFila - origenFila);
-        int diferenciaCol = Math.abs(destinoCol - origenCol);
+    public void setPosicion(int[] posicion) {
+        this.posicion = posicion;
+    }
 
+    // Validar movimientos según el tipo de pieza
+    public boolean validarMovimiento(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero, String tipoPieza, String colorPieza) {
         switch (tipoPieza) {
             case "Peon":
                 return validarMovimientoPeon(origenFila, origenCol, destinoFila, destinoCol, tablero);
@@ -57,7 +64,7 @@ public class Pieza {
             case "Reina":
                 return validarMovimientoReina(origenFila, origenCol, destinoFila, destinoCol, tablero);
             case "Rey":
-                return validarMovimientoRey(origenFila, origenCol, destinoFila, destinoCol, tablero);
+                return validarMovimientoRey(origenFila, origenCol, destinoFila, destinoCol, tablero, colorPieza);
             default:
                 return false;
         }
@@ -249,13 +256,21 @@ public class Pieza {
         return false;
     }
 
-    private boolean validarMovimientoRey(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero) {
+    private boolean validarMovimientoRey(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero, String color) {
         // Verifica que el rey se mueva solo una casilla en cualquier dirección (horizontal, vertical, diagonal)
         if (Math.abs(destinoFila - origenFila) <= 1 && Math.abs(destinoCol - origenCol) <= 1) {
             // Verifica que el destino esté vacío o tenga una pieza del color contrario
             Pieza piezaDestino = tablero.getPieza(destinoFila, destinoCol);
             if (piezaDestino != null && piezaDestino.getColor().equals(this.color)) {
                 return false; // No puede moverse a una casilla ocupada por una pieza del mismo color
+            }
+            //Actualizar la posición del rey
+            this.setPosicion(new int[]{destinoFila, destinoCol});
+            // Actualizar la posición en las variables del rey
+            if (color.equals("Blanco")) {
+                tablero.setPosicionReyBlanco(new int[]{destinoFila, destinoCol});
+            } else if (color.equals("Negro")) {
+                tablero.setPosicionReyNegro(new int[]{destinoFila, destinoCol});
             }
             return true;
         }
