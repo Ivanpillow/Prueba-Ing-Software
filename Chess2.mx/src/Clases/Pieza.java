@@ -28,6 +28,18 @@ public class Pieza {
     public String getImagenPath() {
         return imagenPath;
     }
+    
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    
+    public void setColor(String color){
+        this.color = color;
+    }
+    
+    public void setImagenPath(String path){
+        this.imagenPath = path;
+    }
 
     // Validar movimientos según el tipo de pieza
     public boolean validarMovimiento(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero, String tipoPieza) {

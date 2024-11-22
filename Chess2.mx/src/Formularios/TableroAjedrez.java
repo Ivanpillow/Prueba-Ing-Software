@@ -1,4 +1,3 @@
-
 package Formularios;
 
 import Clases.Pieza;
@@ -83,12 +82,13 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     int y = e.getY();
                     int fila = y / 80;
                     int col = x / 80;
-                    
+
                     if (casillaSeleccionadaX == -1 && casillaSeleccionadaY == -1) {
                         // Seleccionar pieza
                         Pieza pieza = tablero.getPieza(fila, col);
                         if (pieza != null) {
                             // Validar si la pieza pertenece al turno actual
+                            
                             if ((turnoBlanco && pieza.getColor().equals("Blanco"))
                                     || (!turnoBlanco && pieza.getColor().equals("Negro"))) {
                                 casillaSeleccionadaX = col;
@@ -105,9 +105,12 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         if (pieza != null && pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo())) {
                             tablero.setPieza(fila, col, pieza);
                             tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
+                            
+                            //Función que se encarga de promocionar el peón
+                            tablero.coronacionPeon(pieza, fila, turnoBlanco);
 
                             // Cambiar turno
-                            turnoBlanco = !turnoBlanco;
+                            //turnoBlanco = !turnoBlanco;
                             String jugador = turnoBlanco ? "Blancas" : "Negras";
                             JOptionPane.showMessageDialog(TableroAjedrez.this,
                                     "Turno de piezas " + jugador, "Cambio de turno", JOptionPane.INFORMATION_MESSAGE);
