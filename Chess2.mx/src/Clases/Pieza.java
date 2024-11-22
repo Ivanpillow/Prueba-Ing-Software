@@ -257,23 +257,77 @@ public class Pieza {
     }
 
     private boolean validarMovimientoRey(int origenFila, int origenCol, int destinoFila, int destinoCol, Tablero tablero, String color) {
-        // Verifica que el rey se mueva solo una casilla en cualquier dirección (horizontal, vertical, diagonal)
+        //Verifica que el rey se mueva solo una casilla en cualquier dirección (horizontal, vertical, diagonal)
         if (Math.abs(destinoFila - origenFila) <= 1 && Math.abs(destinoCol - origenCol) <= 1) {
-            // Verifica que el destino esté vacío o tenga una pieza del color contrario
+            //Verifica que el destino esté vacío o tenga una pieza del color contrario
             Pieza piezaDestino = tablero.getPieza(destinoFila, destinoCol);
             if (piezaDestino != null && piezaDestino.getColor().equals(this.color)) {
-                return false; // No puede moverse a una casilla ocupada por una pieza del mismo color
+                return false; //No puede moverse a una casilla ocupada por una pieza del mismo color
             }
             //Actualizar la posición del rey
             this.setPosicion(new int[]{destinoFila, destinoCol});
-            // Actualizar la posición en las variables del rey
+            //Actualizar la posición en las variables del rey
             if (color.equals("Blanco")) {
                 tablero.setPosicionReyBlanco(new int[]{destinoFila, destinoCol});
+                tablero.setReyBlancoMovido(true);
             } else if (color.equals("Negro")) {
                 tablero.setPosicionReyNegro(new int[]{destinoFila, destinoCol});
+                tablero.setReyNegroMovido(true);
             }
             return true;
         }
+        
+        //Validación del enroque
+        if (origenFila == destinoFila && Math.abs(destinoCol - origenCol) == 2) {
+            //Determinar el lado del enroque (corto o largo)
+            boolean esLadoCorto = destinoCol > origenCol;
+
+            //Verificar las condiciones para el enroque
+            if (color.equals("Blanco")) {
+                if (tablero.reyBlancoMovido || (esLadoCorto && tablero.torreBlancaDerechaMovida) || (!esLadoCorto && tablero.torreBlancaIzquierdaMovida)) {
+                    return false; //Rey o torre ya se movieron
+                }
+            } else {
+                if (tablero.reyNegroMovido || (esLadoCorto && tablero.torreNegraDerechaMovida) || (!esLadoCorto && tablero.torreNegraIzquierdaMovida)) {
+                    return false; //Rey o torre ya se movieron
+                }
+            }
+
+            //Verificar que no haya piezas entre el rey y la torre
+            int paso = esLadoCorto ? 1 : -1;
+            for (int col = origenCol + paso; col != (esLadoCorto ? 7 : 0); col += paso) {
+                if (tablero.getPieza(origenFila, col) != null) {
+                    return false; //Hay una pieza bloqueando
+                }
+            }
+
+            //Verificar que las casillas no estén bajo ataque
+            for (int col = origenCol; col != destinoCol + paso; col += paso) {
+                if (tablero.isCasillaBajoAtaque(origenFila, col, color)) {
+                    return false; //Casilla bajo ataque
+                }
+            }
+
+            //Realizar el enroque
+            Pieza torre = tablero.getPieza(origenFila, esLadoCorto ? 7 : 0);
+            tablero.setPieza(origenFila, destinoCol - paso, torre); // Mover la torre
+            tablero.setPieza(origenFila, esLadoCorto ? 7 : 0, null);
+            torre.setPosicion(new int[]{origenFila, destinoCol - paso});
+
+            //Mover el rey
+            this.setPosicion(new int[]{origenFila, destinoCol});
+            if (color.equals("Blanco")) {
+                tablero.setPosicionReyBlanco(new int[]{origenFila, destinoCol});
+                tablero.setReyBlancoMovido(true);
+            } else {
+                tablero.setPosicionReyNegro(new int[]{origenFila, destinoCol});
+                tablero.setReyNegroMovido(true);
+            }
+
+            return true;
+        }
+    
+    
 
         // Si no se cumple la condición, el movimiento no es válido
         return false;

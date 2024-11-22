@@ -13,7 +13,19 @@ public class Tablero {
     private int[] peonDobleCasilla; // Guarda la posición del peón que se movió dos casillas
     private int[] posicionReyBlanco;
     private int[] posicionReyNegro;
+    
+    boolean reyBlancoMovido = false;
+    boolean reyNegroMovido = false;
+    boolean torreBlancaIzquierdaMovida = false;
+    boolean torreBlancaDerechaMovida = false;
+    boolean torreNegraIzquierdaMovida = false;
+    boolean torreNegraDerechaMovida = false;
 
+    private String angel = "G:\\CUCEI\\5 Semestre\\SSP de Ingeniería de Software I\\Prueba-Ing-Software\\Chess2.mx\\build\\classes\\Images\\";
+    private String chava = "C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
+    private String ivan = "";
+    
+    
     // Constructor
     public Tablero() {
         tablero = new Pieza[8][8];
@@ -32,9 +44,11 @@ public class Tablero {
          * CAMBIEN EL VALOR DE directorioBase PARA QUE SE CARGUEN BIEN LAS
          * IMÁGENES **************************************
          */
-        String directorioBase = "C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
+       
+        
+        String directorioBase = angel;
 
-        //piezas principales
+        //Piezas principales
         String[] piezasPrincipalesNegro = {"black_rook.png", "black_knight.png", "black_bishop.png", "black_queen.png", "black_king.png", "black_bishop.png", "black_knight.png", "black_rook.png"};
         String[] nombresPiezasNegro = {"Torre", "Caballo", "Alfil", "Reina", "Rey", "Alfil", "Caballo", "Torre"};
 
@@ -43,10 +57,10 @@ public class Tablero {
 
         //Conf de piezas principales (fila 0 para negras, fila 7 para blancas)
         for (int col = 0; col < 8; col++) {
-            // Piezas negras
+            //Piezas negras
             tablero[0][col] = new Pieza(nombresPiezasNegro[col], "Negro", directorioBase + piezasPrincipalesNegro[col]);
             tablero[0][col].setPosicion(new int[]{0, col});
-            // Piezas blancas
+            //Piezas blancas
             tablero[7][col] = new Pieza(nombresPiezasBlanco[col], "Blanco", directorioBase + piezasPrincipalesBlanco[col]);
             tablero[7][col].setPosicion(new int[]{7, col});
         }
@@ -55,24 +69,24 @@ public class Tablero {
         tablero[0][4].setPosicion(new int[]{0, 4});
         tablero[7][4].setPosicion(new int[]{7, 4});
 
-        // Configuración de los peones
+        //Configuración de los peones
         for (int col = 0; col < 8; col++) {
-            // Peones negros
+            //Peones negros
             tablero[1][col] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
             tablero[1][col].setPosicion(new int[]{1, col});
-            // Peones blancos
+            //Peones blancos
             tablero[6][col] = new Pieza("Peon", "Blanco", directorioBase + "white_pawn.png");
             tablero[6][col].setPosicion(new int[]{6, col});
 
         }
     }
 
-    // Obtener pieza en una posición específica
+    //Obtener pieza en una posición específica
     public Pieza getPieza(int fila, int col) {
         return tablero[fila][col];
     }
 
-    // Establecer una pieza en una posición específica
+    //Establecer una pieza en una posición específica
     public void setPieza(int fila, int col, Pieza pieza) {
         tablero[fila][col] = pieza;
     }
@@ -86,10 +100,10 @@ public class Tablero {
     }
 
     public void coronacionPeon(Pieza pieza, int fila, boolean turno) {
-        // Verificar si es un peón y llegó al final del tablero
+        //Verificar si es un peón y llegó al final del tablero
         if (pieza.getTipo().equals("Peon")) {
             if ((pieza.getColor().equals("Blanco") && fila == 0) || (pieza.getColor().equals("Negro") && fila == 7)) {
-                // Coronación
+                //Coronación
                 String[] opciones = {"Reina", "Torre", "Alfil", "Caballo"};
                 String seleccion = (String) JOptionPane.showInputDialog(
                         null,
@@ -107,23 +121,27 @@ public class Tablero {
                  * ADELANTE PARA QUE SE CARGUEN BIEN LAS IMÁGENES
                  * **************************************
                  */
+                
+                String pathCoronacionPeon = angel;
+                
+                
                 if (seleccion != null) {
                     switch (seleccion) {
                         case "Reina":
                             pieza.setTipo("Reina");
-                            pieza.setImagenPath("C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\" + color + "queen.png");
+                            pieza.setImagenPath(pathCoronacionPeon + color + "queen.png");
                             break;
                         case "Torre":
                             pieza.setTipo("Torre");
-                            pieza.setImagenPath("C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\" + color + "rook.png");
+                            pieza.setImagenPath(pathCoronacionPeon + color + "rook.png");
                             break;
                         case "Alfil":
                             pieza.setTipo("Alfil");
-                            pieza.setImagenPath("C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\" + color + "bishop.png");
+                            pieza.setImagenPath(pathCoronacionPeon + color + "bishop.png");
                             break;
                         case "Caballo":
                             pieza.setTipo("Caballo");
-                            pieza.setImagenPath("C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\" + color + "knight.png");
+                            pieza.setImagenPath(pathCoronacionPeon + color + "knight.png");
                             break;
                     }
                 }
@@ -190,5 +208,48 @@ public class Tablero {
         }
         return false; // El rey no está en jaque
     }
+    
+    
+    public boolean isCasillaBajoAtaque(int fila, int col, String color) {
+        // Iterar sobre las piezas del tablero y verificar si alguna puede atacar la casilla.
+        for (int f = 0; f < 8; f++) {
+            for (int c = 0; c < 8; c++) {
+                Pieza pieza = getPieza(f, c);
+                if (pieza != null && !pieza.getColor().equals(color)) {
+                    if (pieza.validarMovimiento(f, c, fila, col, this, pieza.getTipo(), pieza.getColor())) {
+                        return true; // La casilla está bajo ataque
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // Métodos para actualizar el estado del rey y las torres
+    public void setReyBlancoMovido(boolean movido) {
+        this.reyBlancoMovido = movido;
+    }
+
+    public void setReyNegroMovido(boolean movido) {
+        this.reyNegroMovido = movido;
+    }
+
+    // Similar para las torres
+    public void setTorreBlancaIzquierdaMovida(boolean movida) {
+        this.torreBlancaIzquierdaMovida = movida;
+    }
+
+    public void setTorreBlancaDerechaMovida(boolean movida) {
+        this.torreBlancaDerechaMovida = movida;
+    }
+
+    public void setTorreNegraIzquierdaMovida(boolean movida) {
+        this.torreNegraIzquierdaMovida = movida;
+    }
+
+    public void setTorreNegraDerechaMovida(boolean movida) {
+        this.torreNegraDerechaMovida = movida;
+    }
+    
 
 }
