@@ -48,7 +48,7 @@ public class Tablero {
          */
        
         
-        String directorioBase = ivan;
+        String directorioBase = angel;
 
         //Piezas principales
         String[] piezasPrincipalesNegro = {"black_rook.png", "black_knight.png", "black_bishop.png", "black_queen.png", "black_king.png", "black_bishop.png", "black_knight.png", "black_rook.png"};
@@ -124,7 +124,7 @@ public class Tablero {
                  * **************************************
                  */
                 
-                String pathCoronacionPeon = ivan;
+                String pathCoronacionPeon = angel;
                 
                 
                 if (seleccion != null) {

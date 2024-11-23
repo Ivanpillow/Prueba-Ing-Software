@@ -32,7 +32,7 @@ public class Homepage extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         btnNvPartida = new javax.swing.JPanel();
-        btnNPartidatxt = new javax.swing.JLabel();
+        btnNvPartidatxt = new javax.swing.JLabel();
         btnClasif = new javax.swing.JPanel();
         btnClasiftxt = new javax.swing.JLabel();
         btnVolver = new javax.swing.JPanel();
@@ -64,7 +64,7 @@ public class Homepage extends javax.swing.JFrame {
         extTxt.setForeground(new java.awt.Color(255, 255, 255));
         extTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         extTxt.setText("X");
-        extTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        extTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         extTxt.setPreferredSize(new java.awt.Dimension(40, 40));
         extTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,7 +98,7 @@ public class Homepage extends javax.swing.JFrame {
         btnNuevaPartida1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 310, 440));
 
         Header.setBackground(new java.awt.Color(112, 145, 255));
-        Header.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Header.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 HeaderMouseDragged(evt);
@@ -130,17 +130,20 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        btnNPartidatxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnNPartidatxt.setForeground(new java.awt.Color(255, 255, 255));
-        btnNPartidatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnNPartidatxt.setText("Nueva partida");
-        btnNPartidatxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNPartidatxt.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnNvPartidatxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnNvPartidatxt.setForeground(new java.awt.Color(255, 255, 255));
+        btnNvPartidatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnNvPartidatxt.setText("Nueva partida");
+        btnNvPartidatxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNvPartidatxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNvPartidaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNPartidatxtMouseEntered(evt);
+                btnNvPartidatxtMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNPartidatxtMouseExited(evt);
+                btnNvPartidatxtMouseExited(evt);
             }
         });
 
@@ -148,11 +151,15 @@ public class Homepage extends javax.swing.JFrame {
         btnNvPartida.setLayout(btnNvPartidaLayout);
         btnNvPartidaLayout.setHorizontalGroup(
             btnNvPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnNPartidatxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnNvPartidaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnNvPartidatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnNvPartidaLayout.setVerticalGroup(
             btnNvPartidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnNPartidatxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnNvPartidaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnNvPartidatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btnNuevaPartida1.add(btnNvPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 160, 40));
@@ -163,7 +170,7 @@ public class Homepage extends javax.swing.JFrame {
         btnClasiftxt.setForeground(new java.awt.Color(255, 255, 255));
         btnClasiftxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnClasiftxt.setText("Clasificaciones");
-        btnClasiftxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClasiftxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnClasiftxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnClasiftxtMouseClicked(evt);
@@ -190,7 +197,7 @@ public class Homepage extends javax.swing.JFrame {
         btnNuevaPartida1.add(btnClasif, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 160, 40));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnVolverTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnVolverTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -246,12 +253,16 @@ public class Homepage extends javax.swing.JFrame {
 
     
     private void btnNvPartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNvPartidaMouseClicked
+        System.out.println("Botón 'INICIAR PARTIDA' presionado");
+        
         SeleccionJugador2 seleccion = new SeleccionJugador2();
         seleccion.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_btnNvPartidaMouseClicked
 
     private void btnClasiftxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasiftxtMouseClicked
+        System.out.println("Botón 'CLASIFICACIONES' presionado");
+        
         Clasificaciones clasif = new Clasificaciones(); // Crea la ventana
         clasif.setVisible(true); // Muestra la ventana
     }//GEN-LAST:event_btnClasiftxtMouseClicked
@@ -303,13 +314,13 @@ public class Homepage extends javax.swing.JFrame {
         btnClasif.setBackground(new Color(0, 0, 0));
     }//GEN-LAST:event_btnClasiftxtMouseExited
 
-    private void btnNPartidatxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNPartidatxtMouseEntered
+    private void btnNvPartidatxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNvPartidatxtMouseEntered
         btnNvPartida.setBackground(new Color(0, 43, 85));
-    }//GEN-LAST:event_btnNPartidatxtMouseEntered
+    }//GEN-LAST:event_btnNvPartidatxtMouseEntered
 
-    private void btnNPartidatxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNPartidatxtMouseExited
+    private void btnNvPartidatxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNvPartidatxtMouseExited
         btnNvPartida.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_btnNPartidatxtMouseExited
+    }//GEN-LAST:event_btnNvPartidatxtMouseExited
 
     /**
      * @param args the command line arguments
@@ -350,9 +361,9 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JPanel Header;
     private javax.swing.JPanel btnClasif;
     private javax.swing.JLabel btnClasiftxt;
-    private javax.swing.JLabel btnNPartidatxt;
     private javax.swing.JPanel btnNuevaPartida1;
     private javax.swing.JPanel btnNvPartida;
+    private javax.swing.JLabel btnNvPartidatxt;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JLabel btnVolverTxt;
     private javax.swing.JPanel extBtn;
