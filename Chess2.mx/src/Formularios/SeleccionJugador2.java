@@ -114,7 +114,8 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         jpFormRegistro.add(seleccionaJugTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
 
         cbUsers.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
-        cbUsers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUsers.setBorder(null);
+        cbUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUsersActionPerformed(evt);
@@ -139,7 +140,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
                 jtxtPassMousePressed(evt);
             }
         });
-        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 200, 30));
+        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 200, 20));
 
         keyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/key.png"))); // NOI18N
         jpFormRegistro.add(keyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, -1));
@@ -189,6 +190,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
         btnIniciarPart.setBackground(new java.awt.Color(0, 0, 0));
         btnIniciarPart.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciarPart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         IniciarPartTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         IniciarPartTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -261,11 +263,13 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         exitBtn.setLayout(exitBtnLayout);
         exitBtnLayout.setHorizontalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(exitBtnLayout.createSequentialGroup()
+                .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
         exitBtnLayout.setVerticalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
@@ -309,8 +313,8 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
     private void btnVolverTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseClicked
         this.setVisible(false);
-        FormLogin fr2 = new FormLogin();
-        fr2.setVisible(true);
+        Homepage hp2 = new Homepage();
+        hp2.setVisible(true);
     }//GEN-LAST:event_btnVolverTxtMouseClicked
 
     private void btnVolverTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseEntered

@@ -17,7 +17,6 @@ public class Homepage extends javax.swing.JFrame {
         initComponents();
         jLabelUsername.setText("Bienvenido " + username);
         
-        //Centra la ventanada al iniciar
         this.setLocationRelativeTo(this);
     }
 
@@ -42,6 +41,7 @@ public class Homepage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
 
@@ -135,6 +135,14 @@ public class Homepage extends javax.swing.JFrame {
         btnNPartidatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnNPartidatxt.setText("Nueva partida");
         btnNPartidatxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNPartidatxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNPartidatxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNPartidatxtMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnNvPartidaLayout = new javax.swing.GroupLayout(btnNvPartida);
         btnNvPartida.setLayout(btnNvPartidaLayout);
@@ -159,6 +167,12 @@ public class Homepage extends javax.swing.JFrame {
         btnClasiftxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnClasiftxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnClasiftxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClasiftxtMouseExited(evt);
             }
         });
 
@@ -230,19 +244,16 @@ public class Homepage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void abrirSeleccionJugador2() {
-        // Crear y mostrar el formulario de selección del jugador 2
-        SeleccionJugador2 seleccion = new SeleccionJugador2();
-        seleccion.setVisible(true);
-        this.setVisible(false); // Opcional: ocultar la pantalla de inicio
-    }
     
     private void btnNvPartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNvPartidaMouseClicked
-        abrirSeleccionJugador2();
+        SeleccionJugador2 seleccion = new SeleccionJugador2();
+        seleccion.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnNvPartidaMouseClicked
 
     private void btnClasiftxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasiftxtMouseClicked
-        // TODO add your handling code here:
+        Clasificaciones clasif = new Clasificaciones(); // Crea la ventana
+        clasif.setVisible(true); // Muestra la ventana
     }//GEN-LAST:event_btnClasiftxtMouseClicked
 
     private void btnVolverTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseClicked
@@ -283,6 +294,22 @@ public class Homepage extends javax.swing.JFrame {
         extBtn.setBackground(Color.black);
         extTxt.setForeground(Color.white);
     }//GEN-LAST:event_extTxtMouseExited
+
+    private void btnClasiftxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasiftxtMouseEntered
+        btnClasif.setBackground(new Color(0, 43, 85));
+    }//GEN-LAST:event_btnClasiftxtMouseEntered
+
+    private void btnClasiftxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasiftxtMouseExited
+        btnClasif.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_btnClasiftxtMouseExited
+
+    private void btnNPartidatxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNPartidatxtMouseEntered
+        btnNvPartida.setBackground(new Color(0, 43, 85));
+    }//GEN-LAST:event_btnNPartidatxtMouseEntered
+
+    private void btnNPartidatxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNPartidatxtMouseExited
+        btnNvPartida.setBackground(new Color(0, 0, 0));
+    }//GEN-LAST:event_btnNPartidatxtMouseExited
 
     /**
      * @param args the command line arguments

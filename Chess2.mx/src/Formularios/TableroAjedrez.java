@@ -73,6 +73,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
             }
         }
         
+        //LO REINICIA PERO NO LIMPIA DEL TODO EL TABLERO
         private void reiniciarJuego() {
             // Reiniciar el tablero
             tablero = new Tablero();
@@ -86,6 +87,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
             repaint();
         }
         
+        //  ESTA FUNCION MANDA A LLAMAR LAS VERIFICAIONES EN TABLERO.JAVA E INDICA EL CASO
         private void verificarEstadoDelJuego() {
             // Determinar el color del jugador actual
             String colorActual = turnoBlanco ? "Blanco" : "Negro";
@@ -96,7 +98,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,
                         "¡Jaque mate! " + colorActual + " gana el juego.",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                reiniciarJuego();
+                //reiniciarJuego();
                 return;
             }
 
@@ -105,7 +107,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,
                         "¡Empate por rey ahogado!",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                reiniciarJuego();
+                //reiniciarJuego();
                 return;
             }
 
@@ -114,7 +116,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,
                         "¡Empate por material insuficiente!",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                reiniciarJuego();
+                //reiniciarJuego();
                 return;
             }
         }
@@ -194,6 +196,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                                     // Verificar promoción de peón
                                     tablero.coronacionPeon(pieza, fila, turnoBlanco);
                                     
+                                    //AQUI SE SUPONE SE HACEN LAS VERICIACIONES PARA CADA ESCENARIO DE TERMINO DE PARTIDA
                                     //verificarEstadoDelJuego();
 
                                     repaint();
