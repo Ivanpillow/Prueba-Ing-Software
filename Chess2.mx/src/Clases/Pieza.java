@@ -1,4 +1,6 @@
 package Clases;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -331,6 +333,30 @@ public class Pieza {
 
         // Si no se cumple la condición, el movimiento no es válido
         return false;
+    }
+    
+    /**
+     * Obtiene todos los movimientos válidos para esta pieza desde su posición actual.
+     *
+     * @param fila    Fila actual de la pieza.
+     * @param col     Columna actual de la pieza.
+     * @param tablero Objeto Tablero que representa el estado actual del juego.
+     * @return Lista de movimientos válidos como pares [fila, columna].
+     */
+    public List<int[]> obtenerMovimientos(int fila, int col, Tablero tablero) {
+        List<int[]> movimientos = new ArrayList<>();
+
+        // Recorremos todas las posiciones del tablero
+        for (int i = 0; i < 8; i++) { // Tablero de 8x8
+            for (int j = 0; j < 8; j++) {
+                // Validamos si movernos a (i, j) es un movimiento válido
+                if (validarMovimiento(fila, col, i, j, tablero, this.tipo, this.color)) {
+                    movimientos.add(new int[]{i, j}); // Añadimos la posición válida
+                }
+            }
+        }
+
+        return movimientos; // Devolvemos la lista de movimientos válidos
     }
 
 }
