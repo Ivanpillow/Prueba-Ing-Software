@@ -15,7 +15,7 @@ public class Homepage extends javax.swing.JFrame {
     
     public Homepage() {
         initComponents();
-        jLabelUsername.setText("Bienvenido " + username);
+        jLabelUsername.setText("Bienvenido, " + username);
         
         this.setLocationRelativeTo(this);
     }

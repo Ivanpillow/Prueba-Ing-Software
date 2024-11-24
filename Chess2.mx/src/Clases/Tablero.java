@@ -15,7 +15,7 @@ public class Tablero {
     private int[] peonDobleCasilla; // Guarda la posición del peón que se movió dos casillas
     private int[] posicionReyBlanco;
     private int[] posicionReyNegro;
-    
+
     boolean reyBlancoMovido = false;
     boolean reyNegroMovido = false;
     boolean torreBlancaIzquierdaMovida = false;
@@ -26,19 +26,25 @@ public class Tablero {
     private String angel = "G:\\CUCEI\\5 Semestre\\SSP de Ingeniería de Software I\\Prueba-Ing-Software\\Chess2.mx\\build\\classes\\Images\\";
     private String chava = "C:\\Users\\ChavaR\\Desktop\\QUINTO SEMESTRE\\SEMINARIO DE INGENIERIA DE SOFTWARE I\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
     private String ivan = "C:\\Users\\ab_st\\OneDrive\\Documentos\\NetBeansProjects\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
-    
-    
+
     // Constructor
     public Tablero() {
         tablero = new Pieza[8][8];
         peonDobleCasilla = null;
+
+        /*INICIALIZAR EN TABLERO EN DIFERENTES ESCENARIOS
+        PARA QUE SEA MÁS RÁPIDA LA DEMOSTRACIÓN DE LAS
+        DIFERENTES FUNCIONALIDADES*/
         inicializarTablero();
+        //inicializarTableroMaterialInsuficiente();
+        //inicializarTableroJaqueMate();
+
         posicionReyBlanco = new int[]{7, 4};
         posicionReyNegro = new int[]{0, 4};
     }
 
     //Inicializar el tablero con las piezas en las posiciones iniciales
-    private void inicializarTablero() {
+    public void inicializarTablero() {
         //Path base para las imagenes
 
         /**
@@ -46,9 +52,7 @@ public class Tablero {
          * CAMBIEN EL VALOR DE directorioBase PARA QUE SE CARGUEN BIEN LAS
          * IMÁGENES **************************************
          */
-       
-        
-        String directorioBase = angel;
+        String directorioBase = chava;
 
         //Piezas principales
         String[] piezasPrincipalesNegro = {"black_rook.png", "black_knight.png", "black_bishop.png", "black_queen.png", "black_king.png", "black_bishop.png", "black_knight.png", "black_rook.png"};
@@ -83,8 +87,81 @@ public class Tablero {
         }
     }
 
+    public void limpiarTablero() {
+        for (int fila = 0; fila < 8; fila++) {
+            for (int col = 0; col < 8; col++) {
+                tablero[fila][col] = null;
+            }
+        }
+
+    }
+
+    //Inicializar tablero en un escenaario de material insuficiente
+    private void inicializarTableroMaterialInsuficiente() {
+        this.limpiarTablero();
+
+        // Path base para las imágenes
+        String directorioBase = chava;
+
+        /*
+        // Caso 1: Solo dos reyes en el tablero (tablas por material insuficiente)
+        tablero[0][4] = new Pieza("Rey", "Negro", directorioBase + "black_king.png");
+        tablero[0][4].setPosicion(new int[]{0, 4});
+
+        tablero[7][4] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[7][4].setPosicion(new int[]{7, 4});
+         */
+ /*
+        // Caso 2: Rey blanco y un caballo contra el rey negro
+        tablero[1][1] = new Pieza("Rey", "Negro", directorioBase + "black_king.png");
+        tablero[1][1].setPosicion(new int[]{1, 1});
+
+        tablero[6][6] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[6][6].setPosicion(new int[]{6, 6});
+
+        tablero[5][5] = new Pieza("Caballo", "Blanco", directorioBase + "white_knight.png");
+        tablero[5][5].setPosicion(new int[]{5, 5});
+         */
+        // Caso 3: Rey blanco y un alfil contra el rey negro
+        tablero[2][2] = new Pieza("Rey", "Negro", directorioBase + "black_king.png");
+        tablero[2][2].setPosicion(new int[]{2, 2});
+
+        tablero[7][7] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[7][7].setPosicion(new int[]{7, 7});
+
+        tablero[5][3] = new Pieza("Alfil", "Blanco", directorioBase + "white_bishop.png");
+        tablero[5][3].setPosicion(new int[]{5, 3});
+    }
+
+    // Inicializar tablero en un escenario de jaque mate
+    private void inicializarTableroJaqueMate() {
+        this.limpiarTablero();
+
+        // Path base para las imágenes
+        String directorioBase = chava;
+
+        // Escenario de jaque mate
+        // Colocamos al rey blanco en una posición donde está en jaque mate
+        tablero[6][3] = new Pieza("Reina", "Negro", directorioBase + "black_queen.png");
+        tablero[6][3].setPosicion(new int[]{6, 3});
+
+        tablero[5][7] = new Pieza("Torre", "Negro", directorioBase + "black_rook.png");
+        tablero[5][7].setPosicion(new int[]{5, 5});
+
+        tablero[4][4] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
+        tablero[4][4].setPosicion(new int[]{4, 4});
+
+        tablero[6][7] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[6][7].setPosicion(new int[]{7, 4});
+    }
+
+
     //Obtener pieza en una posición específica
     public Pieza getPieza(int fila, int col) {
+        // Verificar límites válidos del tablero
+        if (fila < 0 || fila >= 8 || col < 0 || col >= 8) {
+            return null; // Devuelve null si la posición está fuera de rango
+        }
         return tablero[fila][col];
     }
 
@@ -123,10 +200,8 @@ public class Tablero {
                  * ADELANTE PARA QUE SE CARGUEN BIEN LAS IMÁGENES
                  * **************************************
                  */
-                
-                String pathCoronacionPeon = angel;
-                
-                
+                String pathCoronacionPeon = chava;
+
                 if (seleccion != null) {
                     switch (seleccion) {
                         case "Reina":
@@ -210,8 +285,7 @@ public class Tablero {
         }
         return false; // El rey no está en jaque
     }
-    
-    
+
     public boolean isCasillaBajoAtaque(int fila, int col, String color) {
         // Iterar sobre las piezas del tablero y verificar si alguna puede atacar la casilla.
         for (int f = 0; f < 8; f++) {
@@ -252,7 +326,7 @@ public class Tablero {
     public void setTorreNegraDerechaMovida(boolean movida) {
         this.torreNegraDerechaMovida = movida;
     }
-    
+
     //Esta funcion es el nucleo que controla los movimientos de las piezas, verifica los jaques y movimientos legales
     public boolean moverPieza(int filaInicial, int colInicial, int filaFinal, int colFinal, String colorRey) {
         Pieza pieza = tablero[filaInicial][colInicial];
@@ -264,10 +338,10 @@ public class Tablero {
 
         // Verificar si el rey está en jaque
         boolean enJaque = estaEnJaque(
-            colorRey.equals("Blanco") ? posicionReyBlanco[0] : posicionReyNegro[0],
-            colorRey.equals("Blanco") ? posicionReyBlanco[1] : posicionReyNegro[1],
-            colorRey,
-            this
+                colorRey.equals("Blanco") ? posicionReyBlanco[0] : posicionReyNegro[0],
+                colorRey.equals("Blanco") ? posicionReyBlanco[1] : posicionReyNegro[1],
+                colorRey,
+                this
         );
 
         if (enJaque) {
@@ -276,7 +350,7 @@ public class Tablero {
 
             // Verificar si el movimiento seleccionado está entre los válidos
             boolean movimientoPermitido = movimientosValidos.stream().anyMatch(
-                mov -> mov[0] == filaFinal && mov[1] == colFinal
+                    mov -> mov[0] == filaFinal && mov[1] == colFinal
             );
 
             if (!movimientoPermitido) {
@@ -300,7 +374,7 @@ public class Tablero {
 
         return true;
     }
-    
+
     //Funcion auxiliar de moverPieza para cuando se este en jaque
     public boolean movimientoEvitaJaque(int filaInicial, int colInicial, int filaFinal, int colFinal, String colorRey) {
         // Almacenar el estado original
@@ -325,10 +399,10 @@ public class Tablero {
 
         // Verificar si el rey sigue en jaque
         boolean sigueEnJaque = estaEnJaque(
-            colorRey.equals("Blanco") ? posicionReyBlanco[0] : posicionReyNegro[0],
-            colorRey.equals("Blanco") ? posicionReyBlanco[1] : posicionReyNegro[1],
-            colorRey,
-            this
+                colorRey.equals("Blanco") ? posicionReyBlanco[0] : posicionReyNegro[0],
+                colorRey.equals("Blanco") ? posicionReyBlanco[1] : posicionReyNegro[1],
+                colorRey,
+                this
         );
 
         // Revertir el movimiento
@@ -347,7 +421,7 @@ public class Tablero {
         // Retornar si el movimiento elimina el jaque
         return !sigueEnJaque;
     }
-    
+
     //Esta funcion verificar movimientosd legales cuando se esta en jaque
     public List<int[]> obtenerMovimientosValidos(int fila, int col, String colorRey) {
         List<int[]> movimientosValidos = new ArrayList<>();
@@ -371,7 +445,7 @@ public class Tablero {
 
         return movimientosValidos;
     }
-    
+
     public boolean esJaqueMate(String color) {
         // Obtener las posiciones actuales del rey del color dado
         int filaRey = (color.equals("Blanco")) ? getFilaReyBlanco() : getFilaReyNegro();
@@ -417,7 +491,7 @@ public class Tablero {
         // Si no hay movimientos legales que eliminen el jaque, es jaque mate
         return true;
     }
-    
+
     public boolean esReyAhogado(String color) {
         // Obtener las posiciones actuales del rey del color dado
         int filaRey = (color.equals("Blanco")) ? getFilaReyBlanco() : getFilaReyNegro();
@@ -463,7 +537,7 @@ public class Tablero {
         // Si no hay movimientos legales y el rey no está en jaque, es ahogado
         return true;
     }
-    
+
     public boolean materialInsuficiente() {
         // Contadores de piezas
         int peones = 0, torres = 0, damas = 0, caballos = 0, alfiles = 0;

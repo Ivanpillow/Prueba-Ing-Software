@@ -21,6 +21,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
     private Tablero tablero;
     private int casillaSeleccionadaX = -1, casillaSeleccionadaY = -1; // Coordenadas de la casilla seleccionada
     private boolean turnoBlanco = true;
+    private boolean finDelJuego = false;
 
     public TableroAjedrez() {
         // Crear tablero
@@ -72,11 +73,11 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 colorClaro = !colorClaro;
             }
         }
-        
+
         //LO REINICIA PERO NO LIMPIA DEL TODO EL TABLERO
         private void reiniciarJuego() {
             // Reiniciar el tablero
-            tablero = new Tablero();
+            tablero.inicializarTablero();
 
             // Reiniciar variables de control
             casillaSeleccionadaX = -1;
@@ -86,7 +87,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
             // Actualizar el tablero en pantalla
             repaint();
         }
-        
+
         //  ESTA FUNCION MANDA A LLAMAR LAS VERIFICAIONES EN TABLERO.JAVA E INDICA EL CASO
         private void verificarEstadoDelJuego() {
             // Determinar el color del jugador actual
@@ -98,11 +99,14 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,
                         "¡Jaque mate! " + colorActual + " gana el juego.",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
+                cerrarYMostrarHome();
+                finDelJuego = true;
+
                 //reiniciarJuego();
                 return;
             }
 
-            // Verificar Rey Ahogado
+            /* Verificar Rey Ahogado
             if (tablero.esReyAhogado(colorOponente)) {
                 JOptionPane.showMessageDialog(this,
                         "¡Empate por rey ahogado!",
@@ -110,15 +114,29 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 //reiniciarJuego();
                 return;
             }
-
+             */
             // Verificar Tablas por Material Insuficiente
             if (tablero.materialInsuficiente()) {
                 JOptionPane.showMessageDialog(this,
                         "¡Empate por material insuficiente!",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                //reiniciarJuego();
-                return;
+                reiniciarJuego();
+                cerrarYMostrarHome();
+                //return;
             }
+        }
+
+        // Método auxiliar para cerrar la ventana actual y abrir la Homepage
+        private void cerrarYMostrarHome() {
+            // Cerrar la ventana actual
+            JFrame ventanaActual = (JFrame) this.getTopLevelAncestor();
+            if (ventanaActual != null) {
+                ventanaActual.dispose();
+            }
+            // Crear la nueva ventana (Homepage)
+            Homepage hp = new Homepage();
+            hp.setVisible(true);
+
         }
 
         public PanelTablero() {
@@ -147,7 +165,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
                             }
                         }
                     } else {
-                         // Mover pieza seleccionada
+                        // Mover pieza seleccionada
                         Pieza pieza = tablero.getPieza(casillaSeleccionadaY, casillaSeleccionadaX);
 
                         if (pieza != null && pieza.getColor().equals(turnoBlanco ? "Blanco" : "Negro")) {
@@ -166,21 +184,28 @@ public class TableroAjedrez extends javax.swing.JFrame {
                                 Pieza piezaOriginal = tablero.getPieza(fila, col);
                                 tablero.setPieza(fila, col, pieza);
                                 tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, null);
-                                
+
                                 // Verificar si el movimiento pone al rey enemigo en jaque
                                 int filaReyEnemigo = (!turnoBlanco) ? tablero.getFilaReyBlanco() : tablero.getFilaReyNegro();
                                 int colReyEnemigo = (!turnoBlanco) ? tablero.getColReyBlanco() : tablero.getColReyNegro();
+                                verificarEstadoDelJuego();
 
-                                if (tablero.estaEnJaque(filaReyEnemigo, colReyEnemigo, !turnoBlanco ? "Blanco" : "Negro", tablero)) {
+                                if (tablero.estaEnJaque(filaReyEnemigo, colReyEnemigo, !turnoBlanco ? "Blanco" : "Negro", tablero) && !finDelJuego) {
                                     JOptionPane.showMessageDialog(TableroAjedrez.this,
                                             "¡El rey " + (!turnoBlanco ? "Blanco" : "Negro") + " está en peligro!", "Jaque", JOptionPane.ERROR_MESSAGE);
                                 }
 
-                                // Verificar si el movimiento elimina el jaque
-                                boolean eliminaJaque = !tablero.estaEnJaque(filaRey, colRey, turnoBlanco ? "Blanco" : "Negro", tablero);
+                                if (pieza.getTipo().equals("Rey") && tablero.estaEnJaque(fila, col, turnoBlanco ? "Blanco" : "Negro", tablero) && !finDelJuego) {
+                                    JOptionPane.showMessageDialog(TableroAjedrez.this,
+                                            "¡El rey " + (turnoBlanco ? "Blanco" : "Negro") + " está en peligro!", "Jaque", JOptionPane.ERROR_MESSAGE);
+                                }
 
-                                // Revertir el movimiento si no elimina el jaque
+                                // Verificar si el movimiento elimina el jaque
+                                boolean eliminaJaque = tablero.estaEnJaque(filaRey, colRey, turnoBlanco ? "Blanco" : "Negro", tablero);
+
+                                // Revertir el movimiento si no elimina el jaquee
                                 if (reyEnJaque && !eliminaJaque) {
+
                                     tablero.setPieza(casillaSeleccionadaY, casillaSeleccionadaX, pieza);
                                     tablero.setPieza(fila, col, piezaOriginal);
                                     JOptionPane.showMessageDialog(TableroAjedrez.this,
@@ -195,15 +220,12 @@ public class TableroAjedrez extends javax.swing.JFrame {
 
                                     // Verificar promoción de peón
                                     tablero.coronacionPeon(pieza, fila, turnoBlanco);
-                                    
-                                    //AQUI SE SUPONE SE HACEN LAS VERICIACIONES PARA CADA ESCENARIO DE TERMINO DE PARTIDA
-                                    //verificarEstadoDelJuego();
 
                                     repaint();
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(TableroAjedrez.this,
-                                        "El movimiento realizado no es válido", "Movimiento inválido", JOptionPane.ERROR_MESSAGE);
+                                        "El movimiento realizado no es válido", "Movimiento inválido: " + pieza.getTipo(), JOptionPane.ERROR_MESSAGE);
                             }
                         }
 
