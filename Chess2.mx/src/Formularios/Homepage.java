@@ -253,7 +253,7 @@ public class Homepage extends javax.swing.JFrame {
 
     
     private void btnNvPartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNvPartidaMouseClicked
-        System.out.println("Botón 'INICIAR PARTIDA' presionado");
+        //System.out.println("Botón 'INICIAR PARTIDA' presionado");
         
         SeleccionJugador2 seleccion = new SeleccionJugador2();
         seleccion.setVisible(true);
@@ -261,7 +261,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNvPartidaMouseClicked
 
     private void btnClasiftxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasiftxtMouseClicked
-        System.out.println("Botón 'CLASIFICACIONES' presionado");
+        //System.out.println("Botón 'CLASIFICACIONES' presionado");
         
         Clasificaciones clasif = new Clasificaciones(); // Crea la ventana
         clasif.setVisible(true); // Muestra la ventana

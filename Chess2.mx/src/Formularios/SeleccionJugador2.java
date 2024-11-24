@@ -70,6 +70,18 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error al cargar los usuarios: " + e.getMessage());
         }
+        
+        
+         // Configurar el JComboBox para los colores
+            DefaultComboBoxModel<String> modelColors = new DefaultComboBoxModel<>();
+            cbColor.setModel(modelColors);
+
+            // Agregar las opciones "Negras" y "Blancas"
+            modelColors.addElement("Negras");
+            modelColors.addElement("Blancas");
+
+            // Establecer "Negras" como la opción seleccionada por defecto
+            cbColor.setSelectedIndex(0);
     }
     
     
@@ -100,6 +112,8 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         header = new javax.swing.JPanel();
         exitBtn = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
+        cbColor = new javax.swing.JComboBox<>();
+        usuario2Txt1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -115,21 +129,21 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
         cbUsers.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
         cbUsers.setBorder(null);
-        cbUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUsersActionPerformed(evt);
             }
         });
-        jpFormRegistro.add(cbUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 195, -1));
+        jpFormRegistro.add(cbUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 195, -1));
 
         usuario2Txt.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
-        usuario2Txt.setText("Usuario 2:");
-        jpFormRegistro.add(usuario2Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+        usuario2Txt.setText("Color:");
+        jpFormRegistro.add(usuario2Txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
 
         lblPass.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
         lblPass.setText("Contraseña:");
-        jpFormRegistro.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        jpFormRegistro.add(lblPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
         jtxtPass.setBackground(new java.awt.Color(223, 224, 224));
         jtxtPass.setForeground(new java.awt.Color(153, 153, 153));
@@ -140,17 +154,17 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
                 jtxtPassMousePressed(evt);
             }
         });
-        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 200, 20));
+        jpFormRegistro.add(jtxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 200, 20));
 
         keyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/key.png"))); // NOI18N
-        jpFormRegistro.add(keyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, -1));
+        jpFormRegistro.add(keyIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jpFormRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 195, 20));
+        jpFormRegistro.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 195, 20));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnVolverTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnVolverTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,25 +186,27 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         btnVolver.setLayout(btnVolverLayout);
         btnVolverLayout.setHorizontalGroup(
             btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnVolverLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVolverLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         btnVolverLayout.setVerticalGroup(
             btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnVolverTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVolverLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnVolverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 130, 40));
+        jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 130, 40));
 
         volverIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         volverIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/previousM.png"))); // NOI18N
-        jpFormRegistro.add(volverIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 40, 40));
+        jpFormRegistro.add(volverIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 40, 40));
 
         btnIniciarPart.setBackground(new java.awt.Color(0, 0, 0));
         btnIniciarPart.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciarPart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIniciarPart.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         IniciarPartTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         IniciarPartTxt.setForeground(new java.awt.Color(255, 255, 255));
@@ -212,23 +228,25 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         btnIniciarPart.setLayout(btnIniciarPartLayout);
         btnIniciarPartLayout.setHorizontalGroup(
             btnIniciarPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnIniciarPartLayout.createSequentialGroup()
-                .addComponent(IniciarPartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnIniciarPartLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(IniciarPartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnIniciarPartLayout.setVerticalGroup(
             btnIniciarPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(IniciarPartTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnIniciarPartLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(IniciarPartTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jpFormRegistro.add(btnIniciarPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, 40));
+        jpFormRegistro.add(btnIniciarPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, -1, 40));
 
         entrarIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         entrarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IniciarS.png"))); // NOI18N
-        jpFormRegistro.add(entrarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 40, 40));
+        jpFormRegistro.add(entrarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 40, 40));
 
         header.setBackground(new java.awt.Color(255, 255, 255));
-        header.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        header.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 headerMouseDragged(evt);
@@ -269,7 +287,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         );
         exitBtnLayout.setVerticalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
@@ -292,6 +310,20 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         );
 
         jpFormRegistro.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 30));
+
+        cbColor.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        cbColor.setBorder(null);
+        cbColor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbColorActionPerformed(evt);
+            }
+        });
+        jpFormRegistro.add(cbColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 195, -1));
+
+        usuario2Txt1.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
+        usuario2Txt1.setText("Usuario 2:");
+        jpFormRegistro.add(usuario2Txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,9 +377,18 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         
         
         if(userEncontrado) {
-            TableroAjedrez board = new TableroAjedrez();
-            board.setVisible(true);
-            this.setVisible(false); 
+            String player1 = Sesion.getUsername();
+            String player2 = user2; 
+
+            boolean partidaGuardada = con.guardarPartidaEnBD(player1, player2);
+
+            if(partidaGuardada){
+                TableroAjedrez board = new TableroAjedrez();
+                board.setVisible(true);
+                this.setVisible(false);
+            } else{
+                JOptionPane.showMessageDialog(this, "No se pudo iniciar la partida. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_IniciarPartTxtMouseClicked
 
@@ -391,6 +432,10 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtxtPassMousePressed
 
+    private void cbColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbColorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -431,6 +476,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
     private javax.swing.JPanel btnIniciarPart;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JLabel btnVolverTxt;
+    private javax.swing.JComboBox<String> cbColor;
     private javax.swing.JComboBox<String> cbUsers;
     private javax.swing.JLabel entrarIcon;
     private javax.swing.JPanel exitBtn;
@@ -443,6 +489,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel seleccionaJugTxt;
     private javax.swing.JLabel usuario2Txt;
+    private javax.swing.JLabel usuario2Txt1;
     private javax.swing.JLabel volverIcon;
     // End of variables declaration//GEN-END:variables
 }
