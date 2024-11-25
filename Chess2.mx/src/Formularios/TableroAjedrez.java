@@ -34,31 +34,30 @@ public class TableroAjedrez extends javax.swing.JFrame {
     private int casillaSeleccionadaX = -1, casillaSeleccionadaY = -1; // Coordenadas de la casilla seleccionada
     private boolean turnoBlanco = true;
     private boolean finDelJuego = false;
-    
+
     private int player1Id = 0;
     private int player2Id = 0;
     private String colorPlayer2 = "";
     consultas con = new consultas();
     ConexionDB db = new ConexionDB();
     Connection cn = db.conectar();
-                                            
 
     public TableroAjedrez(int player1Id, int player2Id, String colorPlayer2) {
         //Crear tablero
         tablero = new Tablero(player1Id, player2Id, colorPlayer2);
-        
+
         this.player1Id = player1Id;
         this.player2Id = player2Id;
         this.colorPlayer2 = colorPlayer2;
-        
+
         String NameHeader1 = con.obtenerUsuario(player1Id, cn);
-        String NameHeader2 = con.obtenerUsuario(player2Id, cn); 
-        
+        String NameHeader2 = con.obtenerUsuario(player2Id, cn);
+
         // Configurar la ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-         // Crear etiquetas para mostrar nombres de jugadores
+        // Crear etiquetas para mostrar nombres de jugadores
         JLabel lblPlayer1 = new JLabel("", SwingConstants.CENTER);
         lblPlayer1.setFont(new Font("Arial", Font.BOLD, 18));
         lblPlayer1.setPreferredSize(new Dimension(640, 30)); // Altura de 30px
@@ -73,32 +72,31 @@ public class TableroAjedrez extends javax.swing.JFrame {
 
         // Validación según el color de Player2
         if (colorPlayer2.equalsIgnoreCase("blancas")) {
-            lblPlayer1.setText(NameHeader1); 
-            lblPlayer2.setText(NameHeader2); 
+            lblPlayer1.setText(NameHeader1);
+            lblPlayer2.setText(NameHeader2);
         } else if (colorPlayer2.equalsIgnoreCase("negras")) {
-            lblPlayer1.setText(NameHeader2); 
+            lblPlayer1.setText(NameHeader2);
             lblPlayer2.setText(NameHeader1);
         } else {
             lblPlayer1.setText("Jugador 1");
-            lblPlayer2.setText("Jugador 2"); 
+            lblPlayer2.setText("Jugador 2");
         }
-        
+
         // Añadir el panel donde se dibuja el tablero
         PanelTablero panelTablero = new PanelTablero(player1Id, player2Id, colorPlayer2);
-        
-         // Añadir componentes al layout principal
+
+        // Añadir componentes al layout principal
         add(lblPlayer1, BorderLayout.NORTH); // Nombre del jugador 1 arriba
         add(panelTablero, BorderLayout.CENTER); // Tablero en el centro
         add(lblPlayer2, BorderLayout.SOUTH); // Nombre del jugador 2 abajo
 
         // Configurar el tamaño preferido del panel
         panelTablero.setPreferredSize(new java.awt.Dimension(640, 640)); // Tamaño exacto del tablero (8x8 casillas de 80px)
-        
+
         // Ajustar el tamaño del JFrame automáticamente al contenido
         pack();
         setLocationRelativeTo(null);
 
-        
     }
 
     class PanelTablero extends JPanel {
@@ -157,92 +155,88 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         "¡Jaque mate! " + colorActual + " gana el juego.",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
                 finDelJuego = true;
-                
-                if(colorPlayer2.equals("Blancas")){
+
+                if (colorPlayer2.equals("Blancas")) {
                     colorPlayer2 = "Blanco";
-                } else{
+                } else {
                     colorPlayer2 = "Negro";
                 }
-                
-                
+
                 //Ganó Jugador 2 con Blancas
-                if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")){
+                if (colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = ? WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player2Id);
                     pst.setInt(2, player2Id);
                     pst.setInt(3, player1Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 1: " + pst);
-                
-                //Ganó Jugador 2 con Negras    
-                } else if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Negro")){
+
+                    //Ganó Jugador 2 con Negras    
+                } else if (colorPlayer2.equals(colorActual) && colorPlayer2.equals("Negro")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = ? WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player2Id);
                     pst.setInt(2, player1Id);
                     pst.setInt(3, player2Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 2: " + pst);
-                    
-                //Ganó Jugador 1 con Blancas    
-                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Blanco")){
+
+                    //Ganó Jugador 1 con Blancas    
+                } else if (colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Blanco")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = ? WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player1Id);
                     pst.setInt(2, player2Id);
                     pst.setInt(3, player1Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 3: " + pst);
-                
 
-                //Ganó Jugador 1 con Negras    
-                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Negro")){
+                    //Ganó Jugador 1 con Negras    
+                } else if (colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Negro")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = ? WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player1Id);
                     pst.setInt(2, player1Id);
                     pst.setInt(3, player2Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 4: " + pst);
-                }
-                
-                else {
+                } else {
                     System.out.println("No se cumplió ningun caso");
                 }
-             
+
                 cerrarYMostrarHome();
                 return;
             }
@@ -254,87 +248,83 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
                 //reiniciarJuego();
                 finDelJuego = true;
-                
-                if(colorPlayer2.equals("Blancas")){
+
+                if (colorPlayer2.equals("Blancas")) {
                     colorPlayer2 = "Blanco";
-                } else{
+                } else {
                     colorPlayer2 = "Negro";
                 }
-                
-                
-                if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")){
+
+                if (colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player2Id);
                     pst.setInt(2, player1Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 1: " + pst);
-                
-                //Ganó Jugador 2 con Negras    
-                } else if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Negro")){
+
+                    //Ganó Jugador 2 con Negras    
+                } else if (colorPlayer2.equals(colorActual) && colorPlayer2.equals("Negro")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player1Id);
                     pst.setInt(2, player2Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 2: " + pst);
-                    
-                //Ganó Jugador 1 con Blancas    
-                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Blanco")){
+
+                    //Ganó Jugador 1 con Blancas    
+                } else if (colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Blanco")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player2Id);
                     pst.setInt(2, player1Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 3: " + pst);
-                
 
-                //Ganó Jugador 1 con Negras    
-                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Negro")){
+                    //Ganó Jugador 1 con Negras    
+                } else if (colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Negro")) {
                     // Establecer conexión con la base de datos
                     ConexionDB db = new ConexionDB();
                     Connection cn = db.conectar();
-                    
+
                     String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
-                    
+
                     PreparedStatement pst = cn.prepareStatement(query);
-                    
+
                     pst.setInt(1, player1Id);
                     pst.setInt(2, player2Id);
-                    
+
                     pst.executeUpdate();
 
                     System.out.println("Caso 4: " + pst);
-                }
-                
-                else {
+                } else {
                     System.out.println("No se cumplió ningun caso");
                 }
-                
+
                 cerrarYMostrarHome();
                 //return;
             }
@@ -390,6 +380,9 @@ public class TableroAjedrez extends javax.swing.JFrame {
                             boolean movimientoValido = pieza.validarMovimiento(casillaSeleccionadaY, casillaSeleccionadaX, fila, col, tablero, pieza.getTipo(), pieza.getColor());
 
                             if (movimientoValido) {
+                                if (pieza.getTipo().equals("Peon")) {
+                                    tablero.capturaAlPaso(pieza, fila, col, casillaSeleccionadaY);
+                                }
                                 // Simular el movimiento
                                 Pieza piezaOriginal = tablero.getPieza(fila, col);
                                 tablero.setPieza(fila, col, pieza);
@@ -451,30 +444,39 @@ public class TableroAjedrez extends javax.swing.JFrame {
             });
         }
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel /
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         / If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          
 For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html */
-      try {
-          for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-              if ("Nimbus".equals(info.getName())) {
-                  javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                  break;}}} catch (ClassNotFoundException ex) {
-          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (InstantiationException ex) {
-          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (IllegalAccessException ex) {
-          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);}//</editor-fold>
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }//</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TableroAjedrez(0, 0, "").setVisible(true);
-                
+
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

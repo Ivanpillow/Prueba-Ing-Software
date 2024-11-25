@@ -56,7 +56,7 @@ public class Tablero {
          * CAMBIEN EL VALOR DE directorioBase PARA QUE SE CARGUEN BIEN LAS
          * IMÁGENES **************************************
          */
-        String directorioBase = ivan;
+        String directorioBase = chava;
 
         //Piezas principales
         String[] piezasPrincipalesNegro = {"black_rook.png", "black_knight.png", "black_bishop.png", "black_queen.png", "black_king.png", "black_bishop.png", "black_knight.png", "black_rook.png"};
@@ -105,7 +105,7 @@ public class Tablero {
         this.limpiarTablero();
 
         // Path base para las imágenes
-        String directorioBase = ivan;
+        String directorioBase = chava;
 
         /*
         // Caso 1: Solo dos reyes en el tablero (tablas por material insuficiente)
@@ -142,7 +142,7 @@ public class Tablero {
         this.limpiarTablero();
 
         // Path base para las imágenes
-        String directorioBase = ivan;
+        String directorioBase = chava;
 
         // Escenario de jaque mate
         // Colocamos al rey blanco en una posición donde está en jaque mate
@@ -209,7 +209,7 @@ public class Tablero {
                  * ADELANTE PARA QUE SE CARGUEN BIEN LAS IMÁGENES
                  * **************************************
                  */
-                String pathCoronacionPeon = ivan;
+                String pathCoronacionPeon = chava;
 
                 if (seleccion != null) {
                     switch (seleccion) {
