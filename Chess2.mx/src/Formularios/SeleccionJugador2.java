@@ -345,8 +345,8 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
     private void btnVolverTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseClicked
         this.setVisible(false);
-        Homepage hp2 = new Homepage();
-        hp2.setVisible(true);
+        //Homepage hp2 = new Homepage();
+        //hp2.setVisible(true);
     }//GEN-LAST:event_btnVolverTxtMouseClicked
 
     private void btnVolverTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxtMouseEntered

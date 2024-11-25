@@ -225,15 +225,97 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 //reiniciarJuego();
                 return;
             }
+            
+            
+            
              */
             // Verificar Tablas por Material Insuficiente
             if (tablero.materialInsuficiente()) {
                 JOptionPane.showMessageDialog(this,
                         "¡Empate por material insuficiente!",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                reiniciarJuego();
+                //reiniciarJuego();
+                finDelJuego = true;
+                
+                if(colorPlayer2.equals("Blancas")){
+                    colorPlayer2 = "Blanco";
+                } else{
+                    colorPlayer2 = "Negro";
+                }
                 
                 
+                if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")){
+                    // Establecer conexión con la base de datos
+                    ConexionDB db = new ConexionDB();
+                    Connection cn = db.conectar();
+                    
+                    String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
+                    
+                    PreparedStatement pst = cn.prepareStatement(query);
+                    
+                    pst.setInt(1, player2Id);
+                    pst.setInt(2, player1Id);
+                    
+                    pst.executeUpdate();
+
+                    System.out.println("Caso 1: " + pst);
+                
+                //Ganó Jugador 2 con Negras    
+                } else if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Negro")){
+                    // Establecer conexión con la base de datos
+                    ConexionDB db = new ConexionDB();
+                    Connection cn = db.conectar();
+                    
+                    String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
+                    
+                    PreparedStatement pst = cn.prepareStatement(query);
+                    
+                    pst.setInt(1, player1Id);
+                    pst.setInt(2, player2Id);
+                    
+                    pst.executeUpdate();
+
+                    System.out.println("Caso 2: " + pst);
+                    
+                //Ganó Jugador 1 con Blancas    
+                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Blanco")){
+                    // Establecer conexión con la base de datos
+                    ConexionDB db = new ConexionDB();
+                    Connection cn = db.conectar();
+                    
+                    String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
+                    
+                    PreparedStatement pst = cn.prepareStatement(query);
+                    
+                    pst.setInt(1, player2Id);
+                    pst.setInt(2, player1Id);
+                    
+                    pst.executeUpdate();
+
+                    System.out.println("Caso 3: " + pst);
+                
+
+                //Ganó Jugador 1 con Negras    
+                } else if(colorPlayer2.equals(colorOponente) && colorPlayer2.equals("Negro")){
+                    // Establecer conexión con la base de datos
+                    ConexionDB db = new ConexionDB();
+                    Connection cn = db.conectar();
+                    
+                    String query = "UPDATE games SET winner_id = 0 WHERE player_id_white = ? AND player_id_black = ? AND winner_id IS NULL";
+                    
+                    PreparedStatement pst = cn.prepareStatement(query);
+                    
+                    pst.setInt(1, player1Id);
+                    pst.setInt(2, player2Id);
+                    
+                    pst.executeUpdate();
+
+                    System.out.println("Caso 4: " + pst);
+                }
+                
+                else {
+                    System.out.println("No se cumplió ningun caso");
+                }
                 
                 cerrarYMostrarHome();
                 //return;

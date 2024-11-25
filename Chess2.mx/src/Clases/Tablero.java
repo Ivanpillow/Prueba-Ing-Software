@@ -172,7 +172,12 @@ public class Tablero {
 
     //Establecer una pieza en una posición específica
     public void setPieza(int fila, int col, Pieza pieza) {
-        tablero[fila][col] = pieza;
+        if(fila < 0 || fila >= 8 || col < 0 || col >= 8){
+            return;
+        } else{
+            tablero[fila][col] = pieza;
+        }
+        
     }
 
     public int[] getPeonDobleCasilla() {
