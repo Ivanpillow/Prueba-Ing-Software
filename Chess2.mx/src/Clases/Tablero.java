@@ -50,14 +50,13 @@ public class Tablero {
 
     //Inicializar el tablero con las piezas en las posiciones iniciales
     public void inicializarTablero() {
-        //Path base para las imagenes
 
         /**
          * **************************************
          * CAMBIEN EL VALOR DE directorioBase PARA QUE SE CARGUEN BIEN LAS
          * IMÁGENES **************************************
          */
-        String directorioBase = angel;
+        String directorioBase = ivan;
 
         //Piezas principales
         String[] piezasPrincipalesNegro = {"black_rook.png", "black_knight.png", "black_bishop.png", "black_queen.png", "black_king.png", "black_bishop.png", "black_knight.png", "black_rook.png"};
@@ -106,7 +105,7 @@ public class Tablero {
         this.limpiarTablero();
 
         // Path base para las imágenes
-        String directorioBase = angel;
+        String directorioBase = ivan;
 
         /*
         // Caso 1: Solo dos reyes en el tablero (tablas por material insuficiente)
@@ -210,7 +209,7 @@ public class Tablero {
                  * ADELANTE PARA QUE SE CARGUEN BIEN LAS IMÁGENES
                  * **************************************
                  */
-                String pathCoronacionPeon = angel;
+                String pathCoronacionPeon = ivan;
 
                 if (seleccion != null) {
                     switch (seleccion) {

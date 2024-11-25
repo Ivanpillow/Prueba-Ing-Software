@@ -140,8 +140,6 @@ public class Clasificaciones extends javax.swing.JFrame {
         exitTxt = new javax.swing.JLabel();
         seleccionaJugTxt = new javax.swing.JLabel();
         volverIcon = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JPanel();
-        btnVolverTxt1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -204,10 +202,11 @@ public class Clasificaciones extends javax.swing.JFrame {
         );
         exitBtnLayout.setVerticalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
         seleccionaJugTxt.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
+        seleccionaJugTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         seleccionaJugTxt.setText("Clasificaciones");
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
@@ -220,67 +219,33 @@ public class Clasificaciones extends javax.swing.JFrame {
                     .addGap(0, 450, Short.MAX_VALUE)
                     .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(headerLayout.createSequentialGroup()
-                    .addGap(0, 158, Short.MAX_VALUE)
-                    .addComponent(seleccionaJugTxt)
-                    .addGap(0, 158, Short.MAX_VALUE)))
+                .addComponent(seleccionaJugTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
+            .addGap(0, 41, Short.MAX_VALUE)
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(headerLayout.createSequentialGroup()
                     .addComponent(exitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(headerLayout.createSequentialGroup()
-                    .addGap(0, 4, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(seleccionaJugTxt)
-                    .addGap(0, 4, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 40));
 
         volverIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         volverIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/previousM.png"))); // NOI18N
-        getContentPane().add(volverIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 40, 40));
-
-        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        btnVolverTxt1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnVolverTxt1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolverTxt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnVolverTxt1.setText("  VOLVER");
-        btnVolverTxt1.addMouseListener(new java.awt.event.MouseAdapter() {
+        volverIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volverIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVolverTxt1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolverTxt1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolverTxt1MouseExited(evt);
+                volverIconMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout btnVolverLayout = new javax.swing.GroupLayout(btnVolver);
-        btnVolver.setLayout(btnVolverLayout);
-        btnVolverLayout.setHorizontalGroup(
-            btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVolverLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolverTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        btnVolverLayout.setVerticalGroup(
-            btnVolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVolverLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnVolverTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 130, 40));
+        getContentPane().add(volverIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 40, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,19 +275,9 @@ public class Clasificaciones extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_headerMousePressed
 
-    private void btnVolverTxt1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxt1MouseClicked
+    private void volverIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverIconMouseClicked
         this.setVisible(false);
-        //Homepage hp2 = new Homepage();
-        //hp2.setVisible(true);
-    }//GEN-LAST:event_btnVolverTxt1MouseClicked
-
-    private void btnVolverTxt1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxt1MouseEntered
-        btnVolver.setBackground(new Color(0, 43, 85));
-    }//GEN-LAST:event_btnVolverTxt1MouseEntered
-
-    private void btnVolverTxt1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverTxt1MouseExited
-        btnVolver.setBackground(new Color(0, 0, 0));
-    }//GEN-LAST:event_btnVolverTxt1MouseExited
+    }//GEN-LAST:event_volverIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -360,8 +315,6 @@ public class Clasificaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnVolver;
-    private javax.swing.JLabel btnVolverTxt1;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel header;

@@ -147,8 +147,8 @@ public class FormLogin extends javax.swing.JFrame {
         Background.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         userLabel.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        userLabel.setText("USUARIO");
-        Background.add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 70, -1));
+        userLabel.setText("CORREO ELECTRÓNICO");
+        Background.add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 160, -1));
 
         jtxtEmail.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jtxtEmail.setForeground(new java.awt.Color(204, 204, 204));

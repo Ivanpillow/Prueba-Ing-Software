@@ -52,11 +52,11 @@ public class Homepage extends javax.swing.JFrame {
         jLabelUsername.setForeground(new java.awt.Color(255, 255, 255));
         jLabelUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelUsername.setText("Inicio");
-        btnNuevaPartida1.add(jLabelUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 30, 310, -1));
+        btnNuevaPartida1.add(jLabelUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 310, -1));
 
         iconUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginavatarS.png"))); // NOI18N
-        btnNuevaPartida1.add(iconUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 180, 150));
+        btnNuevaPartida1.add(iconUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 310, 150));
 
         extBtn.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -134,7 +134,7 @@ public class Homepage extends javax.swing.JFrame {
         btnNvPartidatxt.setForeground(new java.awt.Color(255, 255, 255));
         btnNvPartidatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnNvPartidatxt.setText("Nueva partida");
-        btnNvPartidatxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNvPartidatxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNvPartidatxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnNvPartidaMouseClicked(evt);
@@ -170,7 +170,7 @@ public class Homepage extends javax.swing.JFrame {
         btnClasiftxt.setForeground(new java.awt.Color(255, 255, 255));
         btnClasiftxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnClasiftxt.setText("Clasificaciones");
-        btnClasiftxt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnClasiftxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnClasiftxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnClasiftxtMouseClicked(evt);
@@ -204,6 +204,7 @@ public class Homepage extends javax.swing.JFrame {
         btnVolverTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVolverTxt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/previous.png"))); // NOI18N
         btnVolverTxt.setText("  VOLVER");
+        btnVolverTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolverTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVolverTxtMouseClicked(evt);

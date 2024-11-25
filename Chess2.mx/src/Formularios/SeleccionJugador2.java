@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Formularios;
 
 import Clases.ConexionDB;
@@ -129,7 +125,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
         cbUsers.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
         cbUsers.setBorder(null);
-        cbUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUsersActionPerformed(evt);
@@ -170,6 +166,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         btnVolverTxt.setForeground(new java.awt.Color(255, 255, 255));
         btnVolverTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVolverTxt.setText("  VOLVER");
+        btnVolverTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolverTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVolverTxtMouseClicked(evt);
@@ -212,6 +209,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         IniciarPartTxt.setForeground(new java.awt.Color(255, 255, 255));
         IniciarPartTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         IniciarPartTxt.setText("INICIAR PARTIDA");
+        IniciarPartTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         IniciarPartTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IniciarPartTxtMouseClicked(evt);
@@ -287,7 +285,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         );
         exitBtnLayout.setVerticalGroup(
             exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(exitTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
@@ -313,7 +311,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
         cbColor.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
         cbColor.setBorder(null);
-        cbColor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbColor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbColorActionPerformed(evt);

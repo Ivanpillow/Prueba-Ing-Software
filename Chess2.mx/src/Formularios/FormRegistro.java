@@ -59,7 +59,7 @@ public class FormRegistro extends javax.swing.JFrame {
         jpFormRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         header.setBackground(new java.awt.Color(255, 255, 255));
-        header.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        header.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 headerMouseDragged(evt);
@@ -181,11 +181,12 @@ public class FormRegistro extends javax.swing.JFrame {
         jpFormRegistro.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 330, 18));
 
         btnVolver.setBackground(new java.awt.Color(118, 183, 235));
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnVolverTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnVolverTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVolverTxt.setText("  VOLVER");
+        btnVolverTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolverTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVolverTxtMouseClicked(evt);
@@ -212,11 +213,12 @@ public class FormRegistro extends javax.swing.JFrame {
         jpFormRegistro.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 80, 30));
 
         btnGuardar.setBackground(new java.awt.Color(118, 183, 235));
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnGuardarTxt.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnGuardarTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardarTxt.setText("GUARDAR");
+        btnGuardarTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGuardarTxtMouseClicked(evt);

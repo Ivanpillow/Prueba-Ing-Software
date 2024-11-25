@@ -3,7 +3,11 @@ package Formularios;
 import Clases.ConexionDB;
 import Clases.Pieza;
 import Clases.Tablero;
+import Clases.consultas;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -15,8 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -29,16 +35,15 @@ public class TableroAjedrez extends javax.swing.JFrame {
     private boolean turnoBlanco = true;
     private boolean finDelJuego = false;
     
-    private int player1Id;
-    private int player2Id;
-    private String colorPlayer2;
+    private int player1Id = 0;
+    private int player2Id = 0;
+    private String colorPlayer2 = "";
+    consultas con = new consultas();
+    ConexionDB db = new ConexionDB();
+    Connection cn = db.conectar();
                                             
 
     public TableroAjedrez(int player1Id, int player2Id, String colorPlayer2) {
-        //System.out.println("JUGADOR 1: " + player1Id);
-        //System.out.println("JUGADOR 2: " + player2Id);
-        //System.out.println("COLOR JUGADOR 2: " + colorPlayer2);
-        
         //Crear tablero
         tablero = new Tablero(player1Id, player2Id, colorPlayer2);
         
@@ -46,21 +51,54 @@ public class TableroAjedrez extends javax.swing.JFrame {
         this.player2Id = player2Id;
         this.colorPlayer2 = colorPlayer2;
         
-        setTitle("Partida entre " + player1Id + " y " + player2Id);
+        String NameHeader1 = con.obtenerUsuario(player1Id, cn);
+        String NameHeader2 = con.obtenerUsuario(player2Id, cn); 
+        
+        // Configurar la ventana
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        
+         // Crear etiquetas para mostrar nombres de jugadores
+        JLabel lblPlayer1 = new JLabel("", SwingConstants.CENTER);
+        lblPlayer1.setFont(new Font("Arial", Font.BOLD, 18));
+        lblPlayer1.setPreferredSize(new Dimension(640, 30)); // Altura de 30px
+        lblPlayer1.setOpaque(true);
+        lblPlayer1.setBackground(Color.WHITE);
 
+        JLabel lblPlayer2 = new JLabel("", SwingConstants.CENTER);
+        lblPlayer2.setFont(new Font("Arial", Font.BOLD, 18));
+        lblPlayer2.setPreferredSize(new Dimension(640, 30)); // Altura de 30px
+        lblPlayer2.setOpaque(true);
+        lblPlayer2.setBackground(Color.WHITE);
+
+        // Validación según el color de Player2
+        if (colorPlayer2.equalsIgnoreCase("blancas")) {
+            lblPlayer1.setText(NameHeader1); 
+            lblPlayer2.setText(NameHeader2); 
+        } else if (colorPlayer2.equalsIgnoreCase("negras")) {
+            lblPlayer1.setText(NameHeader2); 
+            lblPlayer2.setText(NameHeader1);
+        } else {
+            lblPlayer1.setText("Jugador 1");
+            lblPlayer2.setText("Jugador 2"); 
+        }
+        
         // Añadir el panel donde se dibuja el tablero
         PanelTablero panelTablero = new PanelTablero(player1Id, player2Id, colorPlayer2);
-        add(panelTablero);
+        
+         // Añadir componentes al layout principal
+        add(lblPlayer1, BorderLayout.NORTH); // Nombre del jugador 1 arriba
+        add(panelTablero, BorderLayout.CENTER); // Tablero en el centro
+        add(lblPlayer2, BorderLayout.SOUTH); // Nombre del jugador 2 abajo
 
         // Configurar el tamaño preferido del panel
         panelTablero.setPreferredSize(new java.awt.Dimension(640, 640)); // Tamaño exacto del tablero (8x8 casillas de 80px)
-
+        
         // Ajustar el tamaño del JFrame automáticamente al contenido
         pack();
 
-        // Configurar la ventana
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centrar la ventana
+        
     }
 
     class PanelTablero extends JPanel {
@@ -93,11 +131,10 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 }
                 colorClaro = !colorClaro;
             }
+
         }
 
-        //LO REINICIA PERO NO LIMPIA DEL TODO EL TABLERO
         private void reiniciarJuego() {
-            // Reiniciar el tablero
             tablero.inicializarTablero();
 
             // Reiniciar variables de control
@@ -105,7 +142,6 @@ public class TableroAjedrez extends javax.swing.JFrame {
             casillaSeleccionadaY = -1;
             turnoBlanco = true;
 
-            // Actualizar el tablero en pantalla
             repaint();
         }
 
@@ -209,26 +245,11 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 else {
                     System.out.println("No se cumplió ningun caso");
                 }
-                
-                                          
-
+             
                 cerrarYMostrarHome();
-                //reiniciarJuego();
                 return;
             }
 
-            /* Verificar Rey Ahogado
-            if (tablero.esReyAhogado(colorOponente)) {
-                JOptionPane.showMessageDialog(this,
-                        "¡Empate por rey ahogado!",
-                        "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
-                //reiniciarJuego();
-                return;
-            }
-            
-            
-            
-             */
             // Verificar Tablas por Material Insuficiente
             if (tablero.materialInsuficiente()) {
                 JOptionPane.showMessageDialog(this,
@@ -329,10 +350,6 @@ public class TableroAjedrez extends javax.swing.JFrame {
             if (ventanaActual != null) {
                 ventanaActual.dispose();
             }
-            // Crear la nueva ventana (Homepage)
-            //Homepage hp = new Homepage();
-            //hp.setVisible(true);
-
         }
 
         public PanelTablero(int player1Id, int player2Id, String colorPlayer2) {
@@ -437,7 +454,29 @@ public class TableroAjedrez extends javax.swing.JFrame {
             });
         }
     }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel /
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        / If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         
+For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html */
+      try {
+          for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+              if ("Nimbus".equals(info.getName())) {
+                  javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                  break;}}} catch (ClassNotFoundException ex) {
+          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (InstantiationException ex) {
+          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (IllegalAccessException ex) {
+          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+          java.util.logging.Logger.getLogger(TableroAjedrez.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);}//</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TableroAjedrez(0, 0, "").setVisible(true);
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
