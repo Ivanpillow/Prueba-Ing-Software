@@ -26,13 +26,13 @@ public class Clasificaciones extends javax.swing.JFrame {
         modelo.addColumn("Jugador");
         modelo.addColumn("Partidas Ganadas");
 
-        jTableClasificaciones.setModel(modelo); //Asigna el modelo a la tabla
+        jTableClasificaciones.setModel(modelo); 
 
         try {
-            ConexionDB db = new ConexionDB(); //Conexión a la base de datos
+            ConexionDB db = new ConexionDB();
             Connection cn = db.conectar();
 
-            // Consulta SQL para obtener las clasificaciones
+           
             String query = "SELECT u.username AS jugador, COUNT(g.winner_id) AS partidas_ganadas " +
                            "FROM games g " +
                            "JOIN users u ON g.winner_id = u.user_id " +
@@ -42,14 +42,14 @@ public class Clasificaciones extends javax.swing.JFrame {
             PreparedStatement pst = cn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
-            // Recorre los resultados y los agrega al modelo
+            
             while (rs.next()) {
                 String jugador = rs.getString("jugador");
                 int partidasGanadas = rs.getInt("partidas_ganadas");
                 modelo.addRow(new Object[]{jugador, partidasGanadas});
             }
 
-            cn.close(); // Cierra la conexión
+            cn.close(); 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error al cargar las clasificaciones: " + e.getMessage());
         }

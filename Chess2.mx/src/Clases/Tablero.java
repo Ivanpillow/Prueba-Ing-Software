@@ -40,9 +40,9 @@ public class Tablero {
         /*INICIALIZAR EN TABLERO EN DIFERENTES ESCENARIOS
         PARA QUE SEA MÁS RÁPIDA LA DEMOSTRACIÓN DE LAS
         DIFERENTES FUNCIONALIDADES*/
-        //inicializarTablero();
+        inicializarTablero();
         //inicializarTableroMaterialInsuficiente();
-        inicializarTableroJaqueMate();
+        //inicializarTableroJaqueMate();
 
         posicionReyBlanco = new int[]{7, 4};
         posicionReyNegro = new int[]{0, 4};
