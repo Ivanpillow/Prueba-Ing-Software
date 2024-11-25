@@ -112,33 +112,38 @@ public class consultas {
         return userEncontrado;
     }
     
-    public boolean guardarPartidaEnBD(String player1, String player2) {
+    public boolean guardarPartidaEnBD(int player1Id, int player2Id, String colorPlayer2) {
         try {
             // Establecer conexión con la base de datos
             ConexionDB db = new ConexionDB();
             Connection cn = db.conectar();
 
-            // Obtener los IDs de los jugadores
-            int player1Id = obtenerUsuarioId(player1, cn);
-            int player2Id = obtenerUsuarioId(player2, cn);
 
-            if (player1Id == -1 || player2Id == -1) {
+            if (player1Id == -1 || player2Id == -1){
                 JOptionPane.showMessageDialog(null, "No se pudieron obtener los IDs de los usuarios.", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
 
-            // Insertar el registro en la tabla 'games'
-            String query = "INSERT INTO games (player1_id, player2_id, winner_id, game_date) VALUES (?, ?, NULL, ?)";
+            
+            String query = "INSERT INTO games (player_id_white, player_id_black, winner_id, game_date) VALUES (?, ?, NULL, ?)";
             PreparedStatement pst = cn.prepareStatement(query);
-            pst.setInt(1, player1Id);
-            pst.setInt(2, player2Id);
+            
+            if(colorPlayer2.equals("Blancas")){
+                pst.setInt(1, player2Id);
+                pst.setInt(2, player1Id);
+            } else{
+                pst.setInt(1, player1Id);
+                pst.setInt(2, player2Id);
+            }
+                    
+            
             pst.setDate(3, new java.sql.Date(System.currentTimeMillis()));
 
             int rowsInserted = pst.executeUpdate();
-            cn.close(); // Cerrar conexión
+            cn.close(); 
 
             return rowsInserted > 0;
-        } catch (SQLException e) {
+        } catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error al guardar la partida: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -157,7 +162,7 @@ public class consultas {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al obtener el ID del usuario: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return -1; // Retorna -1 si no se encuentra el usuario
+        return -1;
     }
 
 }

@@ -28,9 +28,14 @@ public class Tablero {
     private String ivan = "C:\\Users\\ab_st\\OneDrive\\Documentos\\NetBeansProjects\\Prueba-Ing-Software\\Chess2.mx\\src\\Images\\";
 
     // Constructor
-    public Tablero() {
+    public Tablero(int player1Id, int player2Id, String colorPlayer2) {
         tablero = new Pieza[8][8];
         peonDobleCasilla = null;
+        
+        
+        //System.out.println("JUGADOR 1: " + player1Id);
+        //System.out.println("JUGADOR 2: " + player2Id);
+        //System.out.println("COLOR JUGADOR 2: " + colorPlayer2);
 
         /*INICIALIZAR EN TABLERO EN DIFERENTES ESCENARIOS
         PARA QUE SEA MÁS RÁPIDA LA DEMOSTRACIÓN DE LAS

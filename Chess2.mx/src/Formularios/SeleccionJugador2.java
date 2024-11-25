@@ -377,15 +377,24 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         
         
         if(userEncontrado) {
+            // Establecer conexión con la base de datos
+            ConexionDB db = new ConexionDB();
+            Connection cn = db.conectar();
+            
             String player1 = Sesion.getUsername();
             String player2 = user2; 
+            
+            int player1Id = con.obtenerUsuarioId(player1, cn);
+            int player2Id = con.obtenerUsuarioId(player2, cn);
 
-            boolean partidaGuardada = con.guardarPartidaEnBD(player1, player2);
+            String colorPlayer2 = (String) cbColor.getSelectedItem();
+            
+            boolean partidaGuardada = con.guardarPartidaEnBD(player1Id, player2Id, colorPlayer2);
 
             if(partidaGuardada){
-                TableroAjedrez board = new TableroAjedrez();
-                board.setVisible(true);
                 this.setVisible(false);
+                TableroAjedrez board = new TableroAjedrez(player1Id, player2Id, colorPlayer2);
+                board.setVisible(true);
             } else{
                 JOptionPane.showMessageDialog(this, "No se pudo iniciar la partida. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -401,7 +410,9 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
     }//GEN-LAST:event_IniciarPartTxtMouseExited
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
-        System.exit(0);
+        this.setVisible(false);
+        Homepage hp2 = new Homepage();
+        hp2.setVisible(true);
     }//GEN-LAST:event_exitTxtMouseClicked
 
     private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered
