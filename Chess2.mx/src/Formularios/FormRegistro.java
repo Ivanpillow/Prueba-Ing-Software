@@ -348,39 +348,39 @@ public class FormRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverTxtMouseClicked
 
     private void btnGuardarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarTxtMouseClicked
+        // Elimina los espacios en blanco antes y después del texto
         String nombreUsuario = jTextNombre.getText().trim();
         String claveUsuario = String.valueOf(jtxtPass.getPassword()).trim();
-        String emailUsuario = jTextNombre.getText().trim();
+        String emailUsuario = jtxtEmail.getText().trim();
 
-        if (nombreUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Ingresa un nombre de usuario válido.");
+        // Validaciones para verificar que no se use el texto predeterminado
+        if (nombreUsuario.isEmpty() || nombreUsuario.equals("Ingrese su nombre de usuario")) {
+            JOptionPane.showMessageDialog(this, "Ingresa un nombre de usuario válido.");
             return;
         }
 
-        if (emailUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Ingresa un correo válido.");
+        if (emailUsuario.isEmpty() || emailUsuario.equals("Ingrese su correo")) {
+            JOptionPane.showMessageDialog(this, "Ingresa un correo válido.");
             return;
         }
-        
-        //if (claveUsuario.isEmpty() || claveUsuario.length() < 8) {
-        if (claveUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Ingresa una contraseña válida.");
-            return;
-        }
-        
 
-        //registrar el usuario
+        if (claveUsuario.isEmpty() || claveUsuario.equals("***********")) {
+            JOptionPane.showMessageDialog(this, "Ingresa una contraseña válida.");
+            return;
+        }
+
+        // Registrar el usuario
         consultas con = new consultas();
         boolean registroExitoso = con.guardarUsuario(nombreUsuario, emailUsuario, claveUsuario);
 
         if (registroExitoso) {
-            //Registro exitoso
+            // Registro exitoso
             JOptionPane.showMessageDialog(this, "Registro exitoso. Ahora puedes iniciar sesión.");
             this.setVisible(false);
             FormLogin login = new FormLogin();
             login.setVisible(true);
         } else {
-            //Error en el registro (por ejemplo, usuario duplicado)
+            // Error en el registro (por ejemplo, usuario duplicado)
             JOptionPane.showMessageDialog(this, "Error al registrar el usuario. Intenta con un nombre diferente.");
         }
     }//GEN-LAST:event_btnGuardarTxtMouseClicked
