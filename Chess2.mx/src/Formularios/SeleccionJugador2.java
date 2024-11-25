@@ -376,7 +376,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
         boolean userEncontrado = con.consultarContrincante(user2, password);
         
         
-        if(userEncontrado) {
+        if(userEncontrado){
             // Establecer conexión con la base de datos
             ConexionDB db = new ConexionDB();
             Connection cn = db.conectar();
@@ -411,8 +411,8 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
         this.setVisible(false);
-        Homepage hp2 = new Homepage();
-        hp2.setVisible(true);
+        // Homepage hp2 = new Homepage();
+        //hp2.setVisible(true);
     }//GEN-LAST:event_exitTxtMouseClicked
 
     private void exitTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseEntered

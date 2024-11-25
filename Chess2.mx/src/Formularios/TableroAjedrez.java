@@ -128,9 +128,9 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     colorPlayer2 = "Negro";
                 }
                 
-                System.out.println("Color Actual: " + colorActual);
-                System.out.println("Color Oponente: " + colorOponente);
-                System.out.println("Color Player2: " + colorPlayer2);
+                //System.out.println("Color Actual: " + colorActual);
+                //System.out.println("Color Oponente: " + colorOponente);
+                //System.out.println("Color Player2: " + colorPlayer2);
                 
                 //Ganó Jugador 2 con Blancas
                 if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")){
@@ -232,6 +232,9 @@ public class TableroAjedrez extends javax.swing.JFrame {
                         "¡Empate por material insuficiente!",
                         "Fin del juego", JOptionPane.INFORMATION_MESSAGE);
                 reiniciarJuego();
+                
+                
+                
                 cerrarYMostrarHome();
                 //return;
             }
@@ -245,8 +248,8 @@ public class TableroAjedrez extends javax.swing.JFrame {
                 ventanaActual.dispose();
             }
             // Crear la nueva ventana (Homepage)
-            Homepage hp = new Homepage();
-            hp.setVisible(true);
+            //Homepage hp = new Homepage();
+            //hp.setVisible(true);
 
         }
 

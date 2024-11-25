@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2024 a las 07:47:14
+-- Tiempo de generación: 25-11-2024 a las 02:04:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,11 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `games` (
   `game_id` int(11) NOT NULL,
-  `player1_id` int(11) DEFAULT NULL,
-  `player2_id` int(11) DEFAULT NULL,
+  `player_id_white` int(11) DEFAULT NULL,
+  `player_id_black` int(11) DEFAULT NULL,
   `winner_id` int(11) DEFAULT NULL,
-  `game_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `game_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `games`
+--
+
+INSERT INTO `games` (`game_id`, `player_id_white`, `player_id_black`, `winner_id`, `game_date`) VALUES
+(40, 7, 9, NULL, '2024-11-24'),
+(41, 9, 8, NULL, '2024-11-24'),
+(42, 9, 7, NULL, '2024-11-24');
 
 -- --------------------------------------------------------
 
@@ -69,7 +78,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `score`) VALUES
 (7, 'angel', 'angel@gmail.com', '1234', 0),
-(8, 'ivan', 'ivan@gmail.com', '1234', 0);
+(8, 'ivan', 'ivan@gmail.com', '1234', 0),
+(9, 'chava', 'chava@gmail.com', '1234', 0);
 
 --
 -- Índices para tablas volcadas
@@ -80,8 +90,8 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `score`) VALUES
 --
 ALTER TABLE `games`
   ADD PRIMARY KEY (`game_id`),
-  ADD KEY `player1_id` (`player1_id`),
-  ADD KEY `player2_id` (`player2_id`),
+  ADD KEY `player1_id` (`player_id_white`),
+  ADD KEY `player2_id` (`player_id_black`),
   ADD KEY `winner_id` (`winner_id`);
 
 --
@@ -108,7 +118,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `games`
 --
 ALTER TABLE `games`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `moves`
@@ -120,7 +130,7 @@ ALTER TABLE `moves`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
@@ -130,8 +140,8 @@ ALTER TABLE `users`
 -- Filtros para la tabla `games`
 --
 ALTER TABLE `games`
-  ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`player1_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `games_ibfk_2` FOREIGN KEY (`player2_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`player_id_white`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `games_ibfk_2` FOREIGN KEY (`player_id_black`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `games_ibfk_3` FOREIGN KEY (`winner_id`) REFERENCES `users` (`user_id`);
 
 --
