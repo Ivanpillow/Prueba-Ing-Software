@@ -241,7 +241,7 @@ public class SeleccionJugador2 extends javax.swing.JFrame {
 
         entrarIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         entrarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IniciarS.png"))); // NOI18N
-        jpFormRegistro.add(entrarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 40, 40));
+        jpFormRegistro.add(entrarIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 40, 40));
 
         header.setBackground(new java.awt.Color(255, 255, 255));
         header.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));

@@ -142,7 +142,7 @@ public class Tablero {
         this.limpiarTablero();
 
         // Path base para las imágenes
-        String directorioBase = angel;
+        String directorioBase = ivan;
 
         // Escenario de jaque mate
         // Colocamos al rey blanco en una posición donde está en jaque mate

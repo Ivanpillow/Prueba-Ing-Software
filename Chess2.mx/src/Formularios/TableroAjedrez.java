@@ -57,8 +57,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
         // Configurar la ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
-        
+
          // Crear etiquetas para mostrar nombres de jugadores
         JLabel lblPlayer1 = new JLabel("", SwingConstants.CENTER);
         lblPlayer1.setFont(new Font("Arial", Font.BOLD, 18));
@@ -97,6 +96,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
         
         // Ajustar el tamaño del JFrame automáticamente al contenido
         pack();
+        setLocationRelativeTo(null);
 
         
     }
@@ -164,9 +164,6 @@ public class TableroAjedrez extends javax.swing.JFrame {
                     colorPlayer2 = "Negro";
                 }
                 
-                //System.out.println("Color Actual: " + colorActual);
-                //System.out.println("Color Oponente: " + colorOponente);
-                //System.out.println("Color Player2: " + colorPlayer2);
                 
                 //Ganó Jugador 2 con Blancas
                 if(colorPlayer2.equals(colorActual) && colorPlayer2.equals("Blanco")){
@@ -474,6 +471,7 @@ For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/p
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TableroAjedrez(0, 0, "").setVisible(true);
+                
             }
         });
     }
