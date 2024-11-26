@@ -31,25 +31,24 @@ public class Tablero {
     public Tablero(int player1Id, int player2Id, String colorPlayer2) {
         tablero = new Pieza[8][8];
         peonDobleCasilla = null;
-        
-        
+
         //System.out.println("JUGADOR 1: " + player1Id);
         //System.out.println("JUGADOR 2: " + player2Id);
         //System.out.println("COLOR JUGADOR 2: " + colorPlayer2);
 
-        /*INICIALIZAR EN TABLERO EN DIFERENTES ESCENARIOS
-        PARA QUE SEA MÁS RÁPIDA LA DEMOSTRACIÓN DE LAS
-        DIFERENTES FUNCIONALIDADES*/
-        inicializarTablero();
-        //inicializarTableroMaterialInsuficiente();
+        //================TABLEROS=============================
+        //inicializarTableroNormal();
+        //inicializarTableroEnroque();
+        //inicializarTableroMaterialInsuficiente(); //REY Y ALFIL CONTRA REY
         //inicializarTableroJaqueMate();
+        //=====================================================
 
         posicionReyBlanco = new int[]{7, 4};
         posicionReyNegro = new int[]{0, 4};
     }
 
     //Inicializar el tablero con las piezas en las posiciones iniciales
-    public void inicializarTablero() {
+    public void inicializarTableroNormal() {
 
         /**
          * **************************************
@@ -149,16 +148,43 @@ public class Tablero {
         tablero[6][3] = new Pieza("Reina", "Negro", directorioBase + "black_queen.png");
         tablero[6][3].setPosicion(new int[]{6, 3});
 
-        tablero[5][7] = new Pieza("Torre", "Negro", directorioBase + "black_rook.png");
-        tablero[5][7].setPosicion(new int[]{5, 5});
+        tablero[6][7] = new Pieza("Torre", "Negro", directorioBase + "black_rook.png");
+        tablero[6][7].setPosicion(new int[]{6, 5});
 
         tablero[4][4] = new Pieza("Peon", "Negro", directorioBase + "black_pawn.png");
         tablero[4][4].setPosicion(new int[]{4, 4});
 
-        tablero[6][7] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
-        tablero[6][7].setPosicion(new int[]{7, 4});
+        tablero[7][7] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[7][7].setPosicion(new int[]{7, 7});
     }
 
+    // Inicializar tablero en un escenario de enroque
+    private void inicializarTableroEnroque() {
+        this.limpiarTablero();
+
+        // Path base para las imágenes
+        String directorioBase = chava;
+
+        // Colocar las piezas para el enroque blanco
+        tablero[7][4] = new Pieza("Rey", "Blanco", directorioBase + "white_king.png");
+        tablero[7][4].setPosicion(new int[]{7, 4});
+
+        tablero[7][0] = new Pieza("Torre", "Blanco", directorioBase + "white_rook.png");
+        tablero[7][0].setPosicion(new int[]{7, 0});
+
+        tablero[7][7] = new Pieza("Torre", "Blanco", directorioBase + "white_rook.png");
+        tablero[7][7].setPosicion(new int[]{7, 7});
+
+        // Colocar las piezas para el enroque negro
+        tablero[0][4] = new Pieza("Rey", "Negro", directorioBase + "black_king.png");
+        tablero[0][4].setPosicion(new int[]{0, 4});
+
+        tablero[0][0] = new Pieza("Torre", "Negro", directorioBase + "black_rook.png");
+        tablero[0][0].setPosicion(new int[]{0, 0});
+
+        tablero[0][7] = new Pieza("Torre", "Negro", directorioBase + "black_rook.png");
+        tablero[0][7].setPosicion(new int[]{0, 7});
+    }
 
     //Obtener pieza en una posición específica
     public Pieza getPieza(int fila, int col) {
@@ -171,12 +197,12 @@ public class Tablero {
 
     //Establecer una pieza en una posición específica
     public void setPieza(int fila, int col, Pieza pieza) {
-        if(fila < 0 || fila >= 8 || col < 0 || col >= 8){
+        if (fila < 0 || fila >= 8 || col < 0 || col >= 8) {
             return;
-        } else{
+        } else {
             tablero[fila][col] = pieza;
         }
-        
+
     }
 
     public int[] getPeonDobleCasilla() {

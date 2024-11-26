@@ -132,6 +132,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
 
         }
 
+        /*
         private void reiniciarJuego() {
             tablero.inicializarTablero();
 
@@ -142,6 +143,7 @@ public class TableroAjedrez extends javax.swing.JFrame {
 
             repaint();
         }
+        */
 
         //  ESTA FUNCION MANDA A LLAMAR LAS VERIFICAIONES EN TABLERO.JAVA E INDICA EL CASO
         private void verificarEstadoDelJuego(int player1Id, int player2Id, String colorPlayer2) throws SQLException {
