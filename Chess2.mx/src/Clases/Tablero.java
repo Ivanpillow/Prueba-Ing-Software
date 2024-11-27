@@ -40,7 +40,7 @@ public class Tablero {
         //inicializarTableroNormal();
         //inicializarTableroEnroque();
         //inicializarTableroMaterialInsuficiente(); //REY Y ALFIL CONTRA REY
-        //inicializarTableroJaqueMate();
+        inicializarTableroJaqueMate();
         //=====================================================
 
         posicionReyBlanco = new int[]{7, 4};
